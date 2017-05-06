@@ -15,7 +15,7 @@ class Mail
         $this->mail->Port = 587;
         $this->mail->SMTPAuth = true;
         $this->mail->Username = 'contato@omercadoamigo.com.br';
-        $this->mail->Password = 'wrTyeYqX';
+        $this->mail->Password = '*****';
         $this->mail->SetFrom( 'contato@omercadoamigo.com.br' , 'O Mercado Amigo' );
         $this->mail->IsHTML(true);
 
