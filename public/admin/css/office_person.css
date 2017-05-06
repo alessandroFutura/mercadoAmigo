@@ -1,0 +1,17 @@
+h3
+{
+    padding-left: 12px;
+}
+
+.box-footer{
+    padding-right: 36px;
+}
+
+.erro_message{
+    right: 40px;
+}
+
+.overlay{
+    background: rgba(0,0,0,.5);
+    z-index: 1040;
+}

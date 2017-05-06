@@ -1,0 +1,108 @@
+<ul class="sidebar-menu">
+    {if $user->user_profile_id == 1001}
+        <li class="treeview" id="menuHome">
+            <a href="{$URI_PUBLIC_ADMIN}home/"><i class="glyphicon glyphicon-home"></i> <span>Home</span></a>
+        </li>
+    {/if}
+    <li class="header">Pessoal</li>
+    {if $user->UserProfile->UserProfileAccess->office->access->value == "Y"}
+    <li class="treeview" id="menuOffice">
+        <a href=""><i class="glyphicon glyphicon-briefcase"></i> <span>Escritório</span>
+            <span class="pull-right-container"><i class="glyphicon glyphicon-chevron-left pull-right"></i></span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{$URI_PUBLIC_ADMIN}escritorio/"><i class="glyphicon glyphicon-menu-right"></i>Dashboard</a></li>
+            <li><a href="{$URI_PUBLIC_ADMIN}escritorio/novo-cliente/"><i class="glyphicon glyphicon-menu-right"></i>Adicionar Cliente</a></li>
+            <li><a href="{$URI_PUBLIC_ADMIN}escritorio/meu-cadastro/"><i class="glyphicon glyphicon-menu-right"></i>Meu Cadastro</a></li>
+            <li><a href="{$URI_PUBLIC_ADMIN}escritorio/pagamentos/"><i class="glyphicon glyphicon-menu-right"></i>Pagamentos</a></li>
+            <li><a href="{$URI_PUBLIC_ADMIN}escritorio/minha-rede/"><i class="glyphicon glyphicon-menu-right"></i>Minha Rede</a></li>
+        </ul>
+    </li>
+    {/if}
+    <li class="header">Cadastros</li>
+    {if $user->UserProfile->UserProfileAccess->receivable->access->value == "Y"}
+    <li class="treeview" id="menuReceivable">
+        <a href="{$URI_PUBLIC_ADMIN}areceber/"><i class="glyphicon glyphicon-usd"></i> <span>A Receber</span></a>
+    </li>
+    {/if}
+    {if $user->UserProfile->UserProfileAccess->account->access->value == "Y"}
+    <li class="treeview" id="menuAccount">
+        <a href="{$URI_PUBLIC_ADMIN}contacorrente/"><i class="fa fa-money"></i> <span>Conta Corrente</span></a>
+    </li>
+    {/if}
+    {if $user->UserProfile->UserProfileAccess->kit->access->value == "Y"}
+    <li class="treeview" id="menuKit">
+        <a href="{$URI_PUBLIC_ADMIN}kits/"><i class="fa fa-shopping-basket"></i> <span>Kits</span></a>
+    </li>
+    {/if}
+    {if $user->UserProfile->UserProfileAccess->product->access->value == "Y"}
+    <li class="treeview" id="menuProduct">
+        <a href=""><i class="glyphicon glyphicon-tags"></i> <span>Produtos</span>
+            <span class="pull-right-container"><i class="glyphicon glyphicon-chevron-left pull-right"></i></span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{$URI_PUBLIC_ADMIN}produtos/"><i class="glyphicon glyphicon-menu-right"></i>Cadastro de Produtos</a></li>
+            <li><a href="{$URI_PUBLIC_ADMIN}produtos/unidades/"><i class="glyphicon glyphicon-menu-right"></i>Cadastro de Unidades</a></li>
+        </ul>
+    </li>
+    {/if}
+    {if $user->UserProfile->UserProfileAccess->order->access->value == "Y"}
+    <li class="treeview" id="menuOrder">
+        <a href=""><i class="glyphicon glyphicon-shopping-cart"></i> <span>Pedidos</span>
+            <span class="pull-right-container"><i class="glyphicon glyphicon-chevron-left pull-right"></i></span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{$URI_PUBLIC_ADMIN}pedidos/"><i class="glyphicon glyphicon-menu-right"></i>Pedidos</a></li>
+            {if $user->UserProfile->UserProfileAccess->order->status_access->value == "Y"}
+                <li><a href="{$URI_PUBLIC_ADMIN}pedidos/status/"><i class="glyphicon glyphicon-menu-right"></i>Status de Pedido</a></li>
+            {/if}
+        </ul>
+    </li>
+    {/if}
+    {if $user->UserProfile->UserProfileAccess->person->access->value == "Y"}
+    <li class="treeview" id="menuPerson">
+        <a href=""><i class="fa fa-users"></i> <span>Pessoas</span>
+            <span class="pull-right-container"><i class="glyphicon glyphicon-chevron-left pull-right"></i></span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{$URI_PUBLIC_ADMIN}pessoas/"><i class="glyphicon glyphicon-menu-right"></i>Cadastro de Pessoas</a></li>
+            <li><a href="{$URI_PUBLIC_ADMIN}pessoas/categorias/"><i class="glyphicon glyphicon-menu-right"></i>Categorias</a></li>
+            <li><a href="{$URI_PUBLIC_ADMIN}pessoas/tipo-contato/"><i class="glyphicon glyphicon-menu-right"></i>Tipo de Contato</a></li>
+        </ul>
+    </li>
+    {/if}
+    {if $user->UserProfile->UserProfileAccess->user->access->value == "Y"}
+    <li class="treeview" id="menuUser">
+        <a href=""><i class="glyphicon glyphicon-user"></i> <span>Usuários</span>
+            <span class="pull-right-container"><i class="glyphicon glyphicon-chevron-left pull-right"></i></span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{$URI_PUBLIC_ADMIN}usuarios/"><i class="glyphicon glyphicon-menu-right"></i>Cadastro de Usuários</a></li>
+            <li><a href="{$URI_PUBLIC_ADMIN}usuarios/perfil/"><i class="glyphicon glyphicon-menu-right"></i>Cadastro de Perfil</a></li>
+        </ul>
+    </li>
+    {/if}
+    {if $user->UserProfile->UserProfileAccess->text->access->value == "Y"}
+    <li class="treeview">
+        <a href="#"><i class="glyphicon glyphicon-font"></i> <span>Textos</span></a>
+    </li>
+    {/if}
+    {if $user->UserProfile->UserProfileAccess->uf->access->value == "Y" || $user->UserProfile->UserProfileAccess->city->access->value == "Y" || $user->UserProfile->UserProfileAccess->district->access->value == "Y"}
+    <li class="header">Configurações</li>
+    {/if}
+    {if $user->UserProfile->UserProfileAccess->uf->access->value == "Y"}
+    <li class="treeview" id="menuUF">
+        <a href="{$URI_PUBLIC_ADMIN}ufs/"><i class="fa fa-map-o"></i> <span>UF</span></a>
+    </li>
+    {/if}
+    {if $user->UserProfile->UserProfileAccess->city->access->value == "Y"}
+    <li class="treeview" id="menuCity">
+        <a href="{$URI_PUBLIC_ADMIN}cidades/"><i class="glyphicon glyphicon-map-marker"></i> <span>Cidades</span></a>
+    </li>
+    {/if}
+    {if $user->UserProfile->UserProfileAccess->district->access->value == "Y"}
+    <li class="treeview" id="menuDistrict">
+        <a href="{$URI_PUBLIC_ADMIN}bairros/"><i class="fa fa-map-signs"></i> <span>Bairros</span></a>
+    </li>
+    {/if}
+</ul>

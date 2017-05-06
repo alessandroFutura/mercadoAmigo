@@ -1,0 +1,115 @@
+<!-- Modal -->
+<div class="modal fade" id="receivableModal" role="dialog" aria-labelledby="receivableModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="receivableModalLabel">Cadastrar Usuário</h4>
+            </div>
+            <div class="modal-body">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab_cad" data-toggle="tab">Título <i class="tab_erro_cad glyphicon glyphicon-exclamation-sign"></i></a></li>
+                        <li><a href="#tab_order" class="tabOrder" data-toggle="tab">Pedido</a></li>
+                        <li><a href="#tab_person" class="tabPerson" data-toggle="tab">Pessoa</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_cad">
+                            <form id="form_receivable">
+                                <input type="hidden" id="receivable_id" name="receivable_id" value="">
+                                <input type="hidden" id="order_id" name="order_id" value="">
+                                <div class="form-group">
+                                    <input type="checkbox" id="receivable_drop" name="receivable_drop" />
+                                    <label for="receivable_drop">Baixar Titulo</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="receivable_code">Código</label>
+                                    <input readonly type="text" class="form-control" id="receivable_code" name="receivable_code" placeholder="Código">
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="person_id">Pessoa</label>
+                                    <select class="form-control select2" id="person_id" name="person_id" style="width: 100%">
+                                        <option value="" disabled="disabled" selected="selected">Selecione a Pessoa</option>
+                                        {foreach from=$l_person item=person key=key}
+                                        <option value={$person->person_id}>{$person->person_name}</option>
+                                        {/foreach}
+                                    </select>
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="modality_id">Modalidade</label>
+                                    <select id="modality_id" name="modality_id" class="form-control select2" data-placeholder="Selecione a Modalidade" style="width: 100%">
+                                        <option value="1001">Boleto</option>
+                                        <option value="1002">Crédito</option>
+                                    </select>
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="receivable_value">Valor</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="glyphicon glyphicon-usd"></i>
+                                        </div>
+                                        <input type="text" class="form-control numeric" id="receivable_value" name="receivable_value" value="0.00" data-inputmask="'alias': 'numeric'" data-mask>
+                                    </div>
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-4">
+                                        <label>Data de Vencimento</label>
+                                        <div class="datePicker input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </div>
+                                            <input type="text" class="form-control" id="receivable_deadline" name="receivable_deadline" placeholder="Data de Vencimento" >
+                                        </div>
+                                        <span class="erro_message pull-right"></span>
+                                    </div>
+                                    <div class="form-group col-xs-4">
+                                        <label>Data de Pagamento</label>
+                                        <div class="datePicker input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </div>
+                                            <input type="text" class="form-control" id="receivable_payment_date" name="receivable_payment_date" placeholder="Data de Pagamento" >
+                                        </div>
+                                        <span class="erro_message pull-right"></span>
+                                    </div>
+                                    <div class="form-group col-xs-4">
+                                        <label>Data de Baixa</label>
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </div>
+                                            <input readonly type="text" class="form-control" id="receivable_drop_date" name="receivable_drop_date" placeholder="Data de Baixa" >
+                                        </div>
+                                        <span class="erro_message pull-right"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pdf">Anexar Boleto</label>
+                                    <input type="file" id="pdf" name="pdf" accept=".pdf" class="filestyle">
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane" id="tab_order">
+                        </div>
+                        <div class="tab-pane" id="tab_person">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnSubmit" onclick="submitReceivable()">Salvar</button>
+            </div>
+
+            <div class="overlay">
+                <i class="glyphicon glyphicon-refresh spin"></i>
+            </div>
+
+        </div>
+    </div>
+</div>

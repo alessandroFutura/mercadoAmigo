@@ -1,0 +1,73 @@
+# Init the Engine
+RewriteEngine on
+
+# Bloquear acesso ao diretorio
+IndexIgnore *
+
+# Default script
+DirectoryIndex login.php
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# init redirects
+RewriteRule ^login/?$ login.php
+RewriteRule ^logout/?$ logout.php
+RewriteRule ^recuperar-senha/?$ pass-recover.php
+RewriteRule ^nova-senha/(.+)?$ new-pass.php?data=$1
+
+# redirects admin
+RewriteRule ^home/?$ home.php
+
+# redirects plugin user #
+RewriteRule ^usuarios/?$ user.php?module=getList
+RewriteRule ^usuarios/perfil/?$ userProfile.php?module=getList
+
+# redirects plugin UF
+RewriteRule ^ufs/?$ uf.php?module=getList
+
+# redirects plugin City
+RewriteRule ^cidades/?$ city.php?module=getList
+
+# redirects plugin District
+RewriteRule ^bairros/?$ district.php?module=getList
+
+# redirects plugin Client
+RewriteRule ^imobiliaria/?$ client.php?module=getList
+
+# redirects plugin Feature
+RewriteRule ^caracteristicas/tipos/?$ featureType.php?module=getList
+RewriteRule ^caracteristicas/?$ feature.php?module=getList
+
+# redirects plugin Immobile
+RewriteRule ^imoveis/categorias/?$ immobileCategory.php?module=getList
+RewriteRule ^imoveis/?$ immobile.php?module=getList
+
+# redirects pluhin Person
+RewriteRule ^pessoas/?$ person.php?module=getList
+RewriteRule ^pessoas/categorias/?$ person_category.php?module=getList
+RewriteRule ^pessoas/tipo-contato/?$ person_contact_type.php?module=getList
+
+# redirects pluhin Produtos
+RewriteRule ^produtos/?$ product.php?module=getList
+RewriteRule ^produtos/unidades/?$ product_unit.php?module=getList
+
+# redirects pluhin Kits
+RewriteRule ^kits/?$ kit.php?module=getList
+
+# redirects pluhin Kits
+RewriteRule ^contacorrente/?$ checking_account.php?module=getList
+
+# redirects pluhin Produtos
+RewriteRule ^escritorio/?$ office.php?module=dashboard
+RewriteRule ^escritorio/novo-cliente/?$ office.php?module=newClient
+RewriteRule ^escritorio/pagamentos/?$ office.php?module=payments
+RewriteRule ^escritorio/meu-cadastro/?$ office.php?module=editInfo
+RewriteRule ^escritorio/minha-rede/?$ office.php?module=rede
+
+# redirects pluhin Produtos
+RewriteRule ^pedidos/?$ order.php?module=getList
+RewriteRule ^pedidos/status/?$ order_status.php?module=getList
+
+# redirects pluhin Produtos
+RewriteRule ^areceber/?$ receivable.php?module=getList

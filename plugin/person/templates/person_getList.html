@@ -1,0 +1,11 @@
+{include file=$PATH_TEMPLATES_ADMIN|cat:"includes/header.html"}
+
+<div id="personTemplate">
+	{include file=$PATH_PLUGIN|cat:"person/templates/person_template.html"}
+</div>
+
+{include file=$PATH_TEMPLATES_ADMIN|cat:"includes/footer.html"}
+
+<script type="text/javascript">
+    var l_uf = {$l_uf|@json_encode};
+</script>

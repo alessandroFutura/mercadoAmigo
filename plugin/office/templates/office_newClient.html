@@ -1,0 +1,194 @@
+{include file=$PATH_TEMPLATES_ADMIN|cat:"includes/header.html"}
+
+<div id="dashboardTemplate">
+    <section class="content">
+        <!-- Your Page Content Here -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-primary">
+                    <div class="box-header" style="padding: 10px 20px 0;">
+                        <h3>Adicionar Nova Pessoa na Rede</h3><hr/>
+                    </div>
+                    <div class="box-body" style="padding: 0 20px 20px;">
+                        <form id="form_person">
+                            <input type="hidden" id="person_active" name="person_active" value="1" />
+                            <input type="hidden" id="person_id" name="person_id" value="">
+                            <input type="hidden" id="person_type" name="person_type" value="F">
+                            <h3>Dados Pessoais</h3>
+                            <div class="form-group col-xs-12">
+                                <label for="person_name">Nome Completo</label>
+                                <input type="text" class="form-control" id="person_name" name="person_name" placeholder="Nome">
+                                <span class="erro_message pull-right"></span>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <label for="person_cpf">CPF</label>
+                                <input type="text" class="form-control" id="person_cpf" name="person_cpf" placeholder="CPF" data-inputmask='"mask": "999.999.999-99"' data-mask>
+                                <span class="erro_message pull-right"></span>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <label for="person_rg">RG</label>
+                                <input type="text" class="form-control" id="person_rg" name="person_rg" placeholder="RG" data-inputmask='"mask": "99.999.999-9"' data-mask>
+                                <span class="erro_message pull-right"></span>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <label>Data de Nascimento</label>
+                                <div class="datePicker input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="person_birth" name="person_birth" placeholder="Data de Nascimento" data-inputmask='"mask": "99/99/9999"' data-mask >
+                                </div>
+                                <span class="erro_message pull-right"></span>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <label for="person_gender">Sexo</label>
+                                <select class="form-control select2" id="person_gender" name="person_gender" style="width: 100%;">
+                                    <option value="" disabled="disabled" selected="selected">Selecione o Sexo</option>
+                                    <option value="M">Masculino</option>
+                                    <option value="S">Feminino</option>
+                                </select>
+                                <span class="erro_message pull-right"></span>
+                            </div>
+                            <h3 style="clear: both; padding-top: 20px;">Endereço Pessoal</h3>
+                            <div class="address">
+                                <div class="form-group col-xs-12 col-sm-6">
+                                    <label>CEP</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="address_cep[]" placeholder="CEP" data-inputmask='"mask": "99999-999"' data-mask>
+                                        <div class="input-group-addon cep" data-toggle="tooltip" data-placement="left" title="Pesquisar Cep">
+                                            <a onclick="searchCep(this)"><i class="glyphicon glyphicon-search"></i></a>
+                                        </div>
+                                    </div>
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6">
+                                    <label>Estado</label>
+                                    <select class="form-control select2" name="filter_uf[]" style="width: 100%;">
+                                        <option value="" disabled="disabled" selected="selected">Selecione a UF</option>
+                                        {foreach from=$l_uf item=uf key=key}
+                                        <option value="{$uf->uf_code}">{$uf->uf_name}</option>
+                                        {/foreach}
+                                    </select>
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6">
+                                    <label>Cidade</label>
+                                    <select class="form-control select2" name="filter_city[]" style="width: 100%;" disabled>
+                                        <option value="" disabled="disabled" selected="selected">Selecione a Cidade</option>
+                                    </select>
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6">
+                                    <label>Bairro</label>
+                                    <select class="form-control select2" name="district_id[]" style="width: 100%;" disabled>
+                                        <option value="" disabled="disabled" selected="selected">Selecione o Bairro</option>
+                                    </select>
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <label for="address_public_place">Logradouro</label>
+                                    <input type="text" class="form-control" id="address_public_place" name="address_public_place[]" placeholder="Logradouro">
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6">
+                                    <label for="address_number">Número</label>
+                                    <input type="text" class="form-control" id="address_number" name="address_number[]" placeholder="Número">
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6">
+                                    <label for="address_complement">Complemento</label>
+                                    <input type="text" class="form-control" id="address_complement" name="address_complement[]" placeholder="Complemento">
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                            </div>
+                            <h3 style="clear: both; padding-top: 20px;">Dados de Contato</h3>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <label for="contact_mail">Email</label>
+                                <input type="text" class="form-control" id="contact_mail" name="contact_mail" placeholder="Email">
+                                <span class="erro_message pull-right"></span>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <label for="contact_phone">Telefone</label>
+                                <input type="text" class="form-control" id="contact_phone" name="contact_phone" placeholder="Telefone" data-inputmask='"mask": "(99)9999-9999"' data-mask>
+                                <span class="erro_message pull-right"></span>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <label for="contact_cel1">Celular 1</label>
+                                <input type="text" class="form-control" id="contact_cel1" name="contact_cel1" placeholder="Celular 1" data-inputmask='"mask": "(99)99999-9999"' data-mask>
+                                <span class="erro_message pull-right"></span>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <label for="contact_cel1_op">Operadora</label>
+                                <input type="text" class="form-control" id="contact_cel1_op" name="contact_cel1_op" placeholder="Operadora">
+                                <span class="erro_message pull-right"></span>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <label for="contact_cel2">Celular 2</label>
+                                <input type="text" class="form-control" id="contact_cel2" name="contact_cel2" placeholder="Celular 2" data-inputmask='"mask": "(99)99999-9999"' data-mask>
+                                <span class="erro_message pull-right"></span>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <label for="contact_cel2_op">Operadora</label>
+                                <input type="text" class="form-control" id="contact_cel2_op" name="contact_cel2_op" placeholder="Operadora">
+                                <span class="erro_message pull-right"></span>
+                            </div>
+                            <h3 style="clear: both; padding-top: 20px;">Dados Bancários</h3>
+                            <div class="form-group col-xs-12">
+                                <label for="bank_code">Banco</label>
+                                <select class="form-control select2" id="bank_code" name="bank_code" style="width: 100%;">
+                                    <option value="">- Selecione o Banco -</option>
+                                    {foreach from=$l_bank item=bank}
+                                        <option value="{$bank->bank_code}">{$bank->bank_code} - {$bank->bank_name}</option>
+                                    {/foreach}
+                                </select>
+                                <span class="erro_message pull-right"></span>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-4">
+                                <label for="bank_agency">Agência</label>
+                                <input type="text" class="form-control" id="bank_agency" name="bank_agency" placeholder="Agência">
+                                <span class="erro_message pull-right"></span>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-4">
+                                <label for="bank_account">Número da Conta</label>
+                                <input type="text" class="form-control" id="bank_account" name="bank_account" placeholder="Número da Conta">
+                                <span class="erro_message pull-right"></span>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-4">
+                                <label for="bank_type">Tipo</label>
+                                <select class="form-control select2" id="bank_type" name="bank_type" style="width: 100%;">
+                                    <option value="">- Selecione o Tipo da Conta -</option>
+                                    <option value="CC">Conta Corrente</option>
+                                    <option value="CP">Conta Poupança</option>
+                                </select>
+                                <span class="erro_message pull-right"></span>
+                            </div>
+                            {if $user->user_id < 1003}
+                                <h3 style="clear: both; padding-top: 20px;">Dados da Rede</h3>
+                                <div class="form-group col-xs-12 col-sm-6">
+                                    <label for="rede_parent_person">Indicador</label>
+                                    <input readonly type="text" value="{if $smarty.get.module == 'newClient'}{$user->Person->person_name}{/if}" class="form-control" id="rede_parent_person" name="rede_parent_person" placeholder="Indicador">
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6">
+                                    <label for="rede_type">Cadastro na Rede</label>
+                                    <select class="form-control select2" id="rede_type" name="rede_type" style="width: 100%;">
+                                        <option selected value="DR">Derramamento na Rede</option>
+                                        <option value="N1">Nível 1</option>
+                                    </select>
+                                </div>
+                            {/if}
+                        </form>
+                    </div>
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary pull-right" id="btnSubmitEdu">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="overlay">
+    <i class="glyphicon glyphicon-refresh spin"></i>
+</div>
+
+{include file=$PATH_TEMPLATES_ADMIN|cat:"includes/footer.html"}

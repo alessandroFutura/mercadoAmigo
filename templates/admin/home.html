@@ -1,0 +1,156 @@
+﻿{include file=$PATH_TEMPLATES_ADMIN|cat:"includes/header.html"}
+<!-- Main content -->
+<section class="content">
+	<!-- Your Page Content Here -->
+	<div class="row">
+		<div class="col-lg-4 col-sm-6 col-xs-12">
+			<a href="{$URI_PUBLIC_ADMIN}escritorio/" class="small-box bg-red">
+				<div class="inner">
+					<h3>Escritório<br/>Virtual</h3>
+					<!--p>&nbsp;</p-->
+				</div>
+				<div class="icon">
+					<i class="glyphicon glyphicon-briefcase"></i>
+				</div>
+				<div class="small-box-footer">Detalhes</i></div>
+			</a>
+		</div>
+		<div class="col-lg-4 col-sm-6 col-xs-12">
+			<a href="{$URI_PUBLIC_ADMIN}areceber/" class="small-box bg-red">
+				<div class="inner">
+					<h3>A Receber</h3>
+					<p>Registros: {$count_receivables}</p>
+				</div>
+				<div class="icon">
+					<i class="glyphicon glyphicon-usd"></i>
+				</div>
+				<div class="small-box-footer">Detalhes</i></div>
+			</a>
+		</div>
+		<div class="clearfix visible-md-block"></div>
+		<div class="clearfix visible-sm-block"></div>
+		<div class="col-lg-4 col-sm-6 col-xs-12">
+			<a href="{$URI_PUBLIC_ADMIN}contacorrente/" class="small-box bg-red">
+				<div class="inner">
+					<h3>Conta Corrente</h3>
+					<p>Registros: {$count_account}</p>
+				</div>
+				<div class="icon">
+					<i class="fa fa-money"></i>
+				</div>
+				<div class="small-box-footer">Detalhes</i></div>
+			</a>
+		</div>
+		<div class="clearfix visible-lg-block"></div>
+		<div class="col-lg-4 col-sm-6 col-xs-12">
+			<a href="{$URI_PUBLIC_ADMIN}kits/" class="small-box bg-red">
+				<div class="inner">
+					<h3>Kits</h3>
+					<p>Registros: {$count_kits}</p>
+				</div>
+				<div class="icon">
+					<i class="fa fa-shopping-basket"></i>
+				</div>
+				<div class="small-box-footer">Detalhes</i></div>
+			</a>
+		</div>
+		<div class="col-lg-4 col-sm-6 col-xs-12">
+			<a href="{$URI_PUBLIC_ADMIN}produtos/" class="small-box bg-red">
+				<div class="inner">
+					<h3>Produtos</h3>
+					<p>Registros: {$count_products}</p>
+				</div>
+				<div class="icon">
+					<i class="glyphicon glyphicon-tags"></i>
+				</div>
+				<div class="small-box-footer">Detalhes</i></div>
+			</a>
+		</div>
+		<div class="col-lg-4 col-sm-6 col-xs-12">
+			<a href="{$URI_PUBLIC_ADMIN}pedidos/" class="small-box bg-red">
+				<div class="inner">
+					<h3>Pedidos</h3>
+					<p>Registros: {$count_orders}</p>
+				</div>
+				<div class="icon">
+					<i class="glyphicon glyphicon-shopping-cart"></i>
+				</div>
+				<div class="small-box-footer">Detalhes</i></div>
+			</a>
+		</div>
+		<div class="col-lg-4 col-sm-6 col-xs-12">
+			<a href="{$URI_PUBLIC_ADMIN}pessoas/" class="small-box bg-red">
+				<div class="inner">
+					<h3>Pessoas</h3>
+					<p>Registros: {$count_persons}</p>
+				</div>
+				<div class="icon">
+					<i class="fa fa-users"></i>
+				</div>
+				<div class="small-box-footer">Detalhes</i></div>
+			</a>
+		</div>
+		<div class="col-lg-4 col-sm-6 col-xs-12">
+			<a href="{$URI_PUBLIC_ADMIN}usuarios/" class="small-box bg-red">
+				<div class="inner">
+					<h3>Usuários</h3>
+					<p>Registros: {$count_users}</p>
+				</div>
+				<div class="icon">
+					<i class="glyphicon glyphicon-user"></i>
+				</div>
+				<div class="small-box-footer">Detalhes</i></div>
+			</a>
+		</div>
+		<div class="col-lg-4 col-sm-6 col-xs-12">
+			<a href="#" class="small-box bg-red">
+				<div class="inner">
+					<h3>Textos</h3>
+					<p>Registros: 0</p>
+				</div>
+				<div class="icon">
+					<i class="glyphicon glyphicon-font"></i>
+				</div>
+				<div class="small-box-footer">Detalhes</div>
+			</a>
+		</div>
+		<div class="col-lg-4 col-sm-6 col-xs-12">
+			<a href="{$URI_PUBLIC_ADMIN}ufs/" class="small-box bg-red">
+				<div class="inner">
+					<h3>UF</h3>
+					<p>Registros: {$count_ufs}</p>
+				</div>
+				<div class="icon">
+					<i class="fa fa-map-o"></i>
+				</div>
+				<div class="small-box-footer">Detalhes</div>
+			</a>
+		</div>
+		<div class="col-lg-4 col-sm-6 col-xs-12">
+			<a href="{$URI_PUBLIC_ADMIN}cidades/" class="small-box bg-red">
+				<div class="inner">
+					<h3>Cidades</h3>
+					<p>Registros: {$count_citys}</p>
+				</div>
+				<div class="icon">
+					<i class="glyphicon glyphicon-map-marker"></i>
+				</div>
+				<div class="small-box-footer">Detalhes</div>
+			</a>
+		</div>
+		<div class="col-lg-4 col-sm-6 col-xs-12">
+			<a href="{$URI_PUBLIC_ADMIN}bairros/" class="small-box bg-red">
+				<div class="inner">
+					<h3>Bairros</h3>
+					<p>Registros: {$count_districts}</p>
+				</div>
+				<div class="icon">
+					<i class="fa fa-map-signs"></i>
+				</div>
+				<div class="small-box-footer">Detalhes</div>
+			</a>
+		</div>
+	</div>
+</section>
+<!-- /.content -->
+{include file=$PATH_TEMPLATES_ADMIN|cat:"includes/footer.html"}

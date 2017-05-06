@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- <html xmlns="http://www.w3.org/1999/xhtml"> -->
+<html lang="pt-br">
+<head>
+    <title>O Mercado Amigo</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <link rel="SHORTCUT ICON" href="{$URI_IMAGES}favicon.ico" type="image/x-icon">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{$URI_PUBLIC_ADMIN}bootstrap-3.3.7/css/bootstrap.min.css" />
+    <!--<link rel="stylesheet" href="{$URI_CSS_ADMIN}skins/skin-blue.min.css" />-->
+    <link rel="stylesheet" href="{$URI_CSS_ADMIN}skins/skin-green.min.css" />
+    <link rel="stylesheet" href="{$URI_PUBLIC_ADMIN}plugins/datatables/dataTables.bootstrap.css" />
+    <link rel="stylesheet" href="{$URI_PUBLIC_ADMIN}plugins/select2/select2.min.css" />
+    <link rel="stylesheet" href="{$URI_PUBLIC_ADMIN}plugins/datepicker/datepicker3.css">
+    <link rel="stylesheet" href="{$URI_CSS_ADMIN}AdminLTE.min.css" />
+    <link rel="stylesheet" href="{$URI_CSS_ADMIN}global.css" />
+    <link rel="stylesheet" href="{$URI_CSS_ADMIN}{$SCRIPT_NAME}.css" />
+    {if $SCRIPT_NAME == "order_status"}
+        <link rel="stylesheet" href="{$URI_CSS_ADMIN}bootstrap-colorpicker.min.css" />
+    {/if}
+    {if $SCRIPT_NAME == "person"}
+        <link rel="stylesheet" href="{$URI_CSS_ADMIN}address.css" />
+    {/if}
+    {if !empty($smarty.get.module) && $smarty.get.module == "newClient"}
+        <!--<link rel="stylesheet" href="{$URI_CSS_ADMIN}person.css" />-->
+        <link rel="stylesheet" href="{$URI_CSS_ADMIN}office_person.css" />
+        <!--<link rel="stylesheet" href="{$URI_CSS_ADMIN}address.css" />-->
+    {/if}
+    {if !empty($smarty.get.module) && $smarty.get.module == "rede"}
+        <link rel="stylesheet" href="{$URI_CSS_ADMIN}office_rede.css" />
+    {/if}
+</head>
+<body class="{if $SCRIPT_NAME == 'login' || $SCRIPT_NAME == 'pass-recover' || $SCRIPT_NAME == 'new-pass'}hold-transition login-page{else}hold-transition skin-green sidebar-mini{/if}">
+{if $SCRIPT_NAME != 'login' && $SCRIPT_NAME != 'pass-recover' && $SCRIPT_NAME != 'new-pass'}
+<div class="wrapper">
+    <!-- Main Header -->
+    <header class="main-header">
+
+        <!-- Logo -->
+        <a href="{$URI_PUBLIC_ADMIN}home/" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>MA</b></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg">OMercado<b>Amigo</b></span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle pull-left" data-toggle="offcanvas" role="button">
+                <i class="glyphicon glyphicon-menu-hamburger"></i>
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+
+            <!-- Seção do Usuário -->
+            <div class="navbar-custom-menu pull-right">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{$URI_PUBLIC_ADMIN}img/avatar{if !empty($user->Person)}{if $user->Person->person_gender == 'M'}5.png{else}2.jpg{/if}{else}5.png{/if}" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{if !empty($user->Person)}{$user->Person->person_name}{else}{$user->user_name}{/if}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="{$URI_PUBLIC_ADMIN}img/avatar{if !empty($user->Person)}{if $user->Person->person_gender == 'M'}5.png{else}2.jpg{/if}{else}5.png{/if}" class="img-circle" alt="User Image">
+                                <p>
+                                    {if !empty($user->Person)}{$user->Person->person_name}{else}{$user->user_name}{/if}
+                                    <small>{$user->user_mail}</small>
+                                </p>
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a onclick="changePass2({$user->user_id})" class="btn btn-primary btn-flat">Alterar Senha</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="{$URI_PUBLIC_ADMIN}logout/" class="btn btn-danger btn-flat">Sair</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- Seção do Usuário -->
+
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="{$URI_PUBLIC_ADMIN}img/avatar{if !empty($user->Person)}{if $user->Person->person_gender == 'M'}5.png{else}2.jpg{/if}{else}5.png{/if}" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>{$user->user_name}</p>
+                </div>
+            </div>
+            {include file=$PATH_TEMPLATES|cat:"admin/menu.html"}
+        </section>
+    </aside>
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                {$page_name}
+                <small>{$page_description}</small>
+            </h1>
+        </section>
+        {/if}

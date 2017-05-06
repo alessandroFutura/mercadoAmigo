@@ -1,0 +1,76 @@
+<!-- Modal -->
+<div class="modal fade" id="userModal" role="dialog" aria-labelledby="userModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="userModalLabel">Cadastrar Usuário</h4>
+            </div>
+            <div class="modal-body">
+                <span id="lastUpdate" class="pull-right">Última atualização:</span>
+                <form id="form_user">
+                    <input type="hidden" id="user_id" name="user_id" value="">
+                    <input type="hidden" id="user_accept_contract" name="user_accept_contract" value="">
+                    <div class="form-group">
+                        <input checked="checked" type="checkbox" id="user_active" name="user_active"/>
+                        <label for="user_active">Ativo</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="user_profile_id">Perfil</label>
+                        <select class="form-control select2" id="user_profile_id" name="user_profile_id" style="width: 100%">
+                            <option value="" disabled="disabled" selected="selected">Selecione o Perfil</option>
+                            {foreach from=$l_profile item=profile key=key}
+                                <option value={$profile->user_profile_id}>{$profile->user_profile_name}</option>
+                            {/foreach}
+                        </select>
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="person_id">Pessoa</label>
+                        <select class="form-control select2" id="person_id" name="person_id" style="width: 100%">
+                            <option value="" disabled="disabled" selected="selected">Selecione a Pessoa</option>
+                            {foreach from=$l_person item=person key=key}
+                                <option value={$person->person_id}>{$person->person_name}</option>
+                            {/foreach}
+                        </select>
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="user_user">Usuário</label>
+                        <input type="text" class="form-control" id="user_user" name="user_user" placeholder="Usuário">
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="user_name">Nome</label>
+                        <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Nome">
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="user_mail">E-mail</label>
+                        <input type="email" class="form-control" id="user_mail" name="user_mail" placeholder="E-mail">
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                   <div class="form-group">
+                        <label for="user_pass">Senha</label>
+                        <input type="password" class="form-control" id="user_pass" name="user_pass" placeholder="Senha">
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="user_pass_confirm">Confrimar senha</label>
+                        <input type="password" class="form-control" id="user_pass_confirm" name="user_pass_confirm" placeholder="Confirmar senha">
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnSubmit" onclick="submitUser()">Salvar</button>
+            </div>
+
+            <div class="overlay">
+                <i class="glyphicon glyphicon-refresh spin"></i>
+            </div>
+
+        </div>
+    </div>
+</div>

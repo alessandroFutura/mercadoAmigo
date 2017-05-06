@@ -1,0 +1,157 @@
+<!-- Modal -->
+<div class="modal fade" id="orderModal" role="dialog" aria-labelledby="orderModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="orderModalLabel">Cadastrar {$page_name}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab_cad" data-toggle="tab">Cadastro <i class="tab_erro_cad glyphicon glyphicon-exclamation-sign"></i></a></li>
+                        <li><a id="aTabItems" href="#tab_items" data-toggle="tab">Kits(<span>0</span>) <i class="tab_erro_items glyphicon glyphicon-exclamation-sign"></i></a></li>
+                        <li><a id="aTabObs" href="#tab_obs" data-toggle="tab">Observações <i class="tab_erro_obs glyphicon glyphicon-exclamation-sign"></i></a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <!-- Cadastro geral da Pessoa -->
+                        <div class="tab-pane active" id="tab_cad">
+                            <span id="lastUpdate" class="pull-right">Última atualização:</span>
+                            <form id="form_order">
+                                <input type="hidden" id="order_id" name="order_id" value="">
+                                <div class="form-group">
+                                    <label for="order_code">Código</label>
+                                    <input readonly type="text" class="form-control" id="order_code" name="order_code" placeholder="Código">
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                {if $user->UserProfile->UserProfileAccess->order->status->value == "Y"}
+                                    <div class="form-group" id="div_statusorder">
+                                        <label for="order_status_id">Status</label>
+                                        <select data-disabled="{if $user->UserProfile->UserProfileAccess->order->status_access->value == 'Y'}N{else}Y{/if}" class="form-control select2" id="order_status_id" name="order_status_id" style="width: 100%">
+                                            <option value="" disabled="disabled" selected="selected">Selecione o Status</option>
+                                            {foreach from=$l_order_status item=status key=key}
+                                                <option value="{$status->order_status_id}">{$status->order_status_name}</option>
+                                            {/foreach}
+                                        </select>
+                                        <span class="erro_message pull-right"></span>
+                                    </div>
+                                {/if}
+                                <div class="form-group">
+                                    <label for="person_id">Pessoa</label>
+                                    {if $user->UserProfile->UserProfileAccess->order->person->value == "Y"}
+                                        <select class="form-control select2" id="person_id" name="person_id" style="width: 100%">
+                                            <option value="" disabled="disabled" selected="selected">Selecione a Pessoa</option>
+                                            {foreach from=$l_person item=person key=key}
+                                                <option value={$person->person_id}>{$person->person_code} - {$person->person_name}</option>
+                                            {/foreach}
+                                        </select>
+                                    {else}
+                                        <input readonly value="{$user->Person->person_name}" type="text" class="form-control" name="order_person_name">
+                                    {/if}
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                <div class="row" id="orderValues">
+                                    <div class="col-sm-4"{if $user->UserProfile->UserProfileAccess->order->addition->value == "N"} style="display:none"{/if}>
+                                        <div class="form-group">
+                                            <label for="order_addition">Acréscimo</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-usd"></i>
+                                                </div>
+                                                <input{if $user->UserProfile->UserProfileAccess->order->addition->value == "N"} readonly="readonly"{/if} type="text" class="form-control numeric" id="order_addition" name="order_addition" value="0.00" data-inputmask="'alias': 'numeric'" data-mask>
+                                            </div>
+                                            <span class="erro_message pull-right"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4"{if $user->UserProfile->UserProfileAccess->order->discount->value == "N"} style="display:none"{/if}>
+                                        <div class="form-group">
+                                            <label for="order_discount">Desconto</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-usd"></i>
+                                                </div>
+                                                <input{if $user->UserProfile->UserProfileAccess->order->discount->value == "N"} readonly="readonly"{/if}  type="text" class="form-control numeric" id="order_discount" name="order_discount" value="0.00" data-inputmask="'alias': 'numeric'" data-mask>
+                                            </div>
+                                            <span class="erro_message pull-right"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="order_value">Valor Total</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-usd"></i>
+                                                </div>
+                                                <input readonly type="text" class="form-control numeric" id="order_value" name="order_value" value="0.00">
+                                            </div>
+                                            <span class="erro_message pull-right"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="tab-pane" id="tab_items">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="kit_id">Kits</label>
+                                        <select id="kit_id" name="kit_id" class="form-control select2" data-placeholder="Selecione o Kit" style="width: 100%">
+                                            <option readonly value="">-- Selecione o Produto --</option>
+                                            {foreach from=$l_kit item=kit key=key}
+                                                <option data-name="{$kit->kit_name}" data-price="{$kit->kit_value}" value="{$kit->kit_id}">{$kit->kit_name} - R${$kit->kit_value|number_format:2:'.':''}</option>
+                                            {/foreach}
+                                        </select>
+                                        <span class="erro_message pull-right"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                       <div class="form-group">
+                                            <label for="order_item_amount">Quantidade</label>
+                                            <input type="number" min="1" max="99" class="form-control" id="order_item_amount" name="order_item_amount" value="1" data-inputmask="'alias': 'integer'" data-mask>
+                                            <span class="erro_message pull-right"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-pad-Top">
+                                    <button type="button" class="btn btn-success" id="btnAddCost" onclick="newItem()"><i class="glyphicon glyphicon-plus"></i> Adicionar</button>
+                                    <!--a class="btn btn-success" id="btnAddCost" onclick="newItem()"><i class="glyphicon glyphicon-plus"></i> Adicionar</a-->
+                                </div>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <th>&nbsp;</th>
+                                    <th>Produto</th>
+                                    <th>Quantidade</th>
+                                    <th>Valor Unitario</th>
+                                    <th>Valor Total</th>
+                                    <th></th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="tab-pane" id="tab_obs">
+                            <div class="form-group">
+                                <label for="order_observation">Observações</label>
+                                <textarea class="form-control" rows="8" id="order_observation" name="order_observation" placeholder="Observações"></textarea>
+                                <span class="erro_message pull-right"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnSubmit" onclick="submitOrder()">Salvar</button>
+            </div>
+            <div class="overlay">
+                <i class="glyphicon glyphicon-refresh spin"></i>
+            </div>
+        </div>
+    </div>
+</div>

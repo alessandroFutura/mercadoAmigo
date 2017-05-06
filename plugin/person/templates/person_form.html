@@ -1,0 +1,215 @@
+<div class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab_cad" data-toggle="tab">Cadastro <i class="tab_erro_cad glyphicon glyphicon-exclamation-sign"></i></a></li>
+        <li><a href="#tab_address" data-toggle="tab">Endereço <i class="tab_erro_address glyphicon glyphicon-exclamation-sign"></i></a></li>
+        <li><a href="#tab_contact" data-toggle="tab">Contato <i class="tab_erro_contact glyphicon glyphicon-exclamation-sign"></i></a></li>
+        <li><a href="#tab_bank" data-toggle="tab">Conta Bancária <i class="tab_erro_bank glyphicon glyphicon-exclamation-sign"></i></a></li>
+        {if $SCRIPT_NAME == "office"}<li><a href="#tab_rede" data-toggle="tab">Dados da Rede <i class="tab_erro_rede glyphicon glyphicon-exclamation-sign"></i></a></li>{/if}
+    </ul>
+    <div class="tab-content">
+        <!-- Cadastro geral da Pessoa -->
+        <div class="tab-pane active" id="tab_cad">
+            <span id="lastUpdate" class="pull-right">Última atualização:</span>
+            <form id="form_person">
+                <input type="hidden" id="person_active" name="person_active" value="1" />
+                <input type="hidden" id="person_id" name="person_id" value="">
+                <div class="form-group margin-0 divPersonActive">
+                    <input checked type="checkbox" id="person_active" name="person_active"/>
+                    <label for="person_active">Ativo</label>
+                </div>
+                <div class="form-group">
+                    <label for="person_code">Código</label>
+                    <input readonly type="text" class="form-control" id="person_code" name="person_code" placeholder="Código">
+                    <span class="erro_message pull-right"></span>
+                </div>
+                <div class="form-group">
+                    <label for="person_name">Nome</label>
+                    <input type="text" class="form-control" id="person_name" name="person_name" placeholder="Nome">
+                    <span class="erro_message pull-right"></span>
+                </div>
+                <div class="form-group divPersonCategory">
+                    <label for="person_category">Categorias</label>
+                    <select id="person_category" name="person_category_id[]" class="form-control select2" multiple="multiple" data-placeholder="Selecione as categorias" style="width: 100%">
+                        {foreach from=$l_person_category item=category key=key}
+                        <option value="{$category->person_category_id}">{$category->person_category_name}</option>
+                        {/foreach}
+                    </select>
+                    <span class="erro_message pull-right"></span>
+                </div>
+                <div class="form-group">
+                    <label for="person_nickname">Apelido</label>
+                    <input type="text" class="form-control" id="person_nickname" name="person_nickname" placeholder="Apelido">
+                    <span class="erro_message pull-right"></span>
+                </div>
+                <div class="form-group">
+                    <label for="person_type">Tipo</label>
+                    <select class="form-control select2" id="person_type" name="person_type" style="width: 100%;">
+                        <option value="F">Física</option>
+                        <option value="J">Jurídica</option>
+                    </select>
+                    <span class="erro_message pull-right"></span>
+                </div>
+                <div class="form-group">
+                    <label for="person_cnpj">CNPJ</label>
+                    <input type="text" class="form-control" id="person_cnpj" name="person_cnpj" placeholder="CNPJ" data-inputmask='"mask": "99.999.999/9999-99"' data-mask>
+                    <span class="erro_message pull-right"></span>
+                </div>
+                <div class="form-group">
+                    <label for="person_cpf">CPF</label>
+                    <input type="text" class="form-control" id="person_cpf" name="person_cpf" placeholder="CPF" data-inputmask='"mask": "999.999.999-99"' data-mask>
+                    <span class="erro_message pull-right"></span>
+                </div>
+                <div class="form-group">
+                    <label for="person_rg">RG</label>
+                    <input type="text" class="form-control" id="person_rg" name="person_rg" placeholder="RG" data-inputmask='"mask": "99.999.999-9"' data-mask>
+                    <span class="erro_message pull-right"></span>
+                </div>
+                <div class="form-group">
+                    <label>Data de Nascimento</label>
+                    <div class="datePicker input-group date">
+                        <div class="input-group-addon">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </div>
+                        <input readonly type="text" class="form-control" id="person_birth" name="person_birth" placeholder="Data de Nascimento" >
+                    </div>
+                    <span class="erro_message pull-right"></span>
+                </div>
+                <div class="form-group">
+                    <label for="person_gender">Sexo</label>
+                    <select class="form-control select2" id="person_gender" name="person_gender" style="width: 100%;">
+                        <!--<option value="" disabled="disabled" selected="selected">Selecione o Sexo</option>-->
+                        <option selected="selected" value="M">Masculino</option>
+                        <option value="S">Feminino</option>
+                    </select>
+                    <span class="erro_message pull-right"></span>
+                </div>
+            </form>
+        </div>
+        <!-- Cadastro geral da Pessoa -->
+
+        <!-- Cadastro de Endereços -->
+        <div class="tab-pane" id="tab_address">
+            <div class="boxBtn">
+                <a class="btn btn-success" id="btnAddAddress" onclick="newAddress()"><i class="glyphicon glyphicon-plus"></i> Novo Endereço</a>
+            </div>
+            <div>
+                {include file=$PATH_PLUGIN|cat:"address/templates/address.html"}
+            </div>
+        </div>
+        <!--Cadastro de Endereços -->
+
+        <!--Cadastro de Contatos -->
+        <div class="tab-pane" id="tab_contact">
+            <div class="boxBtn">
+                <a class="btn btn-success" id="btnAddContact" onclick="newContact()"><i class="glyphicon glyphicon-plus"></i> Novo Contato</a>
+            </div>
+            <div>
+                <form id="form_person_contact">
+                    <input type="hidden" name="delete_contact" id="delete_contact" value="" />
+                    <div class="panel-group" id="accordionContact" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default" id="contactModel" style="display: none">
+                            <div class="panel-heading" role="tab" id="headingContact">
+                                <a class="panel-title btn-block collapsed" role="button"
+                                   data-toggle="collapse" data-parent="#accordionContact"
+                                   href="#boxContactModel" aria-expanded="false" aria-controls="boxContactModel">
+                                    <i class="glyphicon glyphicon-star-empty"></i>
+                                    <span class="contact_title">Contato 01</span>
+                                    <i class="arrow glyphicon glyphicon-menu-down pull-right"></i>
+                                    <span class="erro_message_contact pull-right">Dados Incompletos</span>
+                                </a>
+                            </div>
+                            <div id="boxContactModel" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingContact">
+                                <div class="panel-body">
+
+                                    <input type="hidden" name="person_contact_id[]" value="">
+                                    <div class="form-group margin-0">
+                                        <input type="checkbox" id="person_contact_main" name="person_contact_main[]"/>
+                                        <label for="person_contact_main">Principal</label>
+                                        <a name="btnDelContact" class="btnDelContact pull-right"><i class="glyphicon glyphicon-trash" title="Excluir"></i></a>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tipo</label>
+                                        <select class="form-control select2" name="person_contact_type_id[]" style="width: 100%;">
+                                            {foreach from=$l_person_contact_type item=type key=key}
+                                            <option value="{$type->person_contact_type_id}">{$type->person_contact_type_name}</option>
+                                            {/foreach}
+                                        </select>
+                                        <span class="erro_message pull-right"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Contato</label>
+                                        <input type="text" class="form-control" name="person_contact_value[]" placeholder="Contato">
+                                        <span class="erro_message pull-right"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Nome do Contato</label>
+                                        <input type="text" class="form-control" name="person_contact_name[]" placeholder="Nome do Contato">
+                                        <span class="erro_message pull-right"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--Cadastro de Conta Bancária -->
+        <div class="tab-pane" id="tab_bank">
+            <form id="form_bank">
+                <input type="hidden" id="person_bank_id" name="person_bank_id" value="">
+                <div class="form-group">
+                    <label for="person_category">Banco</label>
+                    <select id="bank_code" name="bank_code" class="form-control select2" style="width: 100%">
+                        <option value="" disabled="disabled" selected="selected">Selecione o Banco</option>
+                        {foreach from=$l_bank item=bank key=key}
+                        <option value="{$bank->bank_code}">{$bank->bank_code} - {$bank->bank_name}</option>
+                        {/foreach}
+                    </select>
+                    <span class="erro_message pull-right"></span>
+                </div>
+                <div class="form-group">
+                    <label for="person_bank_agency">Agência</label>
+                    <input type="text" class="form-control" id="person_bank_agency" name="person_bank_agency" placeholder="Agência">
+                    <span class="erro_message pull-right"></span>
+                </div>
+                <div class="form-group">
+                    <label for="person_bank_account">Conta</label>
+                    <input type="text" class="form-control" id="person_bank_account" name="person_bank_account" placeholder="Conta">
+                    <span class="erro_message pull-right"></span>
+                </div>
+                <div class="form-group">
+                    <label for="person_bank_type">Tipo</label>
+                    <select class="form-control select2" id="person_bank_type" name="person_bank_type" style="width: 100%;">
+                        <option value="" disabled="disabled" selected="selected">Selecione o Tipo da Conta</option>
+                        <option value="CC">Conta/Corrente</option>
+                        <option value="CP">Conta/Poupança</option>
+                    </select>
+                    <span class="erro_message pull-right"></span>
+                </div>
+            </form>
+        </div>
+        {if $SCRIPT_NAME == "office"}
+            <!--Cadastro das informações da Rede -->
+            <div class="tab-pane" id="tab_rede">
+                <form id="form_rede">
+                    <div class="form-group">
+                        <label for="rede_parent_person">Indicador</label>
+                        <input readonly type="text" value="{if $smarty.get.module == 'newClient'}{$user->Person->person_name}{/if}" class="form-control" id="rede_parent_person" name="rede_parent_person" placeholder="Indicador">
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="rede_type">Cadastro na Rede</label>
+                        <select class="form-control select2" id="rede_type" name="rede_type" style="width: 100%;">
+                            <option value="" disabled="disabled" selected="selected">Selecione o Cadastro na Rede</option>
+                            {if $user->user_id == 1002}<option value="N1">Nível 1</option>{/if}
+                            <option value="DR">Derramamento na Rede</option>
+                        </select>
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                </form>
+            </div>
+        {/if}
+
+    </div>
+</div>

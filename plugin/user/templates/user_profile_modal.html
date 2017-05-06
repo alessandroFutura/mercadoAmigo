@@ -1,0 +1,31 @@
+<!-- Modal -->
+<div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="profileModalLabel">Cadastrar Perfil</h4>
+            </div>
+            <div class="modal-body">
+                <span id="lastUpdate" class="pull-right">Última atualização:</span>
+                <form id="form_profile">
+                    <input type="hidden" id="user_profile_id" name="user_profile_id" value="">
+                    <div class="form-group">
+                        <label for="user_profile_name">Nome</label>
+                        <input type="text" class="form-control" id="user_profile_name" name="user_profile_name" placeholder="Nome">
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                    <label for="user_profile_access">Acessos do Perfil</label>
+                    {include file=$PATH_PLUGIN|cat:"user/templates/user_profile_access.html"}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnSubmit" onclick="submitProfile()">Salvar</button>
+            </div>
+            <div class="overlay">
+                <i class="glyphicon glyphicon-refresh spin"></i>
+            </div>
+        </div>
+    </div>
+</div>

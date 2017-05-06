@@ -1,0 +1,113 @@
+{include file=$PATH_TEMPLATES_ADMIN|cat:"includes/header.html"}
+
+<div id="dashboardTemplate">
+    <section class="content">
+        <!-- Your Page Content Here -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-primary">
+                    <div class="box-body">
+                        <div class="nav-tabs-custom">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#tab_tree" data-toggle="tab">Em Árvore</a></li>
+                                <li><a href="#tab_column" data-toggle="tab">Em Colunas</a></li>
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_tree">
+                                <canvas id="viewport" width="1000" height="600"></canvas>
+                                <div class="box-header">
+                                    {foreach from=$nodecolor item=color key=key}
+                                    <span class="badge" style="background:{$color};">{if $key == 0}Dono da Rede{else}Nível {$key}{/if}</span>
+                                    {/foreach}
+                                    <span class="badge" style="background:{$nodecolorEmpty};">Derramamento da Rede</span>
+                                    <span class="badge" style="background:{$nodecolorUseful};">Vaga Disponível</span>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab_column">
+                                <div class="row levels">
+                                    <div class="col-sm-1 columnLevel"></div>
+                                    {foreach from=$columnRede item=level}
+                                        <div class="col-sm-1 columnLevel">
+                                            <div class="people">{$level->people} de {$level->total_people} Pessoa{if $level->people !=0}s{/if} / {(($level->people*100)/$level->total_people)|number_format:2:'.':''}%</div>
+                                            <div class="level" style="background:{$nodecolor[$level->level]};">Nível {$level->level}</div>
+                                            <div class="percent" style="height:{($level->people*100)/$level->total_people}%;background:{$nodecolor[$level->level]};"></div>
+                                            <div class="column" style="background:{$nodecolor[$level->level]};"></div>
+                                        </div>
+                                    {/foreach}
+                                    <div class="col-sm-1 columnLevel"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="{$URI_PUBLIC_ADMIN}jquery/jquery-2.2.4.min.js"></script>
+<script>{literal}
+(function ($) {
+    var Renderer = function (canvas) {
+        var canvas = $(canvas).get(0);
+        var ctx = canvas.getContext("2d");
+        var particleSystem;
+        var that = {
+            init: function (system) {
+                particleSystem = system;
+                particleSystem.screenSize(canvas.width, canvas.height);
+                particleSystem.screenPadding(100);
+                that.initMouseHandling()
+            },
+
+            redraw: function () {
+                ctx.fillStyle = "white";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                particleSystem.eachEdge(function (edge, pt1, pt2) {
+                    ctx.strokeStyle = edge.data.linkcolor;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(edge.data.pt1.x, edge.data.pt1.y);
+                    ctx.lineTo(edge.data.pt2.x, edge.data.pt2.y);
+                    ctx.stroke();
+                });
+                particleSystem.eachNode(function (node, pt) {
+                    ctx.beginPath();
+                    ctx.arc( node.data.position.x, node.data.position.y, 8, 0, 2 * Math.PI);
+                    ctx.fillStyle = node.data.nodecolor;
+                    ctx.fill();
+                    ctx.font = "12px Arial";
+                    ctx.fillStyle = node.data.textcolor;
+                    ctx.fillText( node.data.name, node.data.position.x - (parseInt(node.data.name.length/2)*6) , node.data.position.y + node.data.textPosition );
+                });
+            },
+            initMouseHandling: function () {
+                var dragged = null;
+                var handler = {
+                    clicked: function (e) {
+                    },
+                    dragged: function (e) {
+                    },
+                    dropped: function (e) {
+                    }
+                };
+                $(canvas).mousedown(handler.clicked);
+            }
+        }
+        return that;
+    }
+    $(document).ready(function () {
+        // repulsion, stiffnes, friction
+        var sys = arbor.ParticleSystem(0, 0, 0);
+        sys.renderer = Renderer("#viewport");
+        sys.graft({
+            nodes: {/literal}{$nodes|@json_encode}{literal},
+        edges: {/literal}{$edges|@json_encode}{literal}
+    });
+
+    })
+})(this.jQuery);
+{/literal}</script>
+
+{include file=$PATH_TEMPLATES_ADMIN|cat:"includes/footer.html"}

@@ -1,0 +1,65 @@
+<section class="content">
+	<!-- Your Page Content Here -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">Lista de Entradas e Saídas</h3>
+					<div class="pull-right">
+						<!--<a class="btn btn-success" onclick="cadProfile()"><i class="glyphicon glyphicon-plus"></i> Cadastrar</a>-->
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table id="table_checking_account" class="table table-bordered table-hover" cellspacing="0" width="100%">
+						<thead>
+							<tr>
+								<th></th>
+								<th>Benificiado</th>
+								<th>Cedente</th>
+								<th>Título</th>
+								<th>Valor</th>
+								<th>Entrada</th>
+								<th></th>
+								<th></th>
+								<th class="visible-xs-block"></th>
+							</tr>
+						</thead>
+						<tbody>
+							{foreach from=$l_checking_account item=checking_account key=key}
+								<tr style="color:{$checking_account->checking_account_status->color};">
+									<td data-label="Status" align="center" valign="middle"><span data-toggle="tooltip" data-placement="top" title="{$checking_account->checking_account_status->title}" class="glyphicon glyphicon-stop"></span></span></td>
+									<td data-label="Pessoa">{$checking_account->Person->person_name}</td>
+									<td data-label="Pessoa">{$checking_account->PersonOrigin->person_name}</td>
+									<td data-label="Pedido">{$checking_account->Receivable->receivable_code}</td>
+									<td data-label="Valor">{$checking_account->checking_account_value|number_format:2:'.':''}</td>
+									<td data-label="Valor">{$checking_account->checking_account_date|date_format:'%d/%m/%Y'}</td>
+									<td class="center hidden-xs"><a onclick="editProfile({$checking_account->checking_account_id})"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a></td>
+									<td class="center hidden-xs">
+										{if 1}
+											<a class="customTooltip" data-toggle="tooltip" data-placement="left" title="Exclusão bloqueada!"><i class="glyphicon glyphicon-lock"></i></a>
+										{else}
+											<a name="btnDel" data-userchecking_accountid="{$checking_account->checking_account_id}"><i class="glyphicon glyphicon-trash" title="Excluir"></i></a>
+										{/if}
+									</td>
+									<td class="visible-xs-block">
+										<a class="btn btn-info" onclick="editProfile({$checking_account->checking_account_id})"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
+										{if 1}
+											<a class="btn count_users customTooltip" data-toggle="tooltip" data-placement="left" title="Exclusão bloqueada!"><i class="glyphicon glyphicon-lock"></i> Excluir</a>
+										{else}
+											<a class="btn btn-danger" name="btnDel" data-userchecking_accountid="{$checking_account->checking_account_id}"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
+										{/if}
+									</td>
+								</tr>
+							{/foreach}
+						</tbody>
+					</table>
+				</div>
+
+				{include file=$PATH_PLUGIN|cat:"account/templates/account_modal.html"}
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /.content -->

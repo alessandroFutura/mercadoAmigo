@@ -1,0 +1,24 @@
+<div class="panel-group" id="accordion">
+     {foreach from=$user_profile_access key=k item=profile_access}     
+          <div class="panel panel-default">
+               <div class="panel-heading">
+                    <h4 class="panel-title">
+                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse{$k}">{$profile_access->name}</a>
+                    </h4>
+               </div>
+               <div id="collapse{$k}" class="panel-collapse collapse">
+                    <div class="panel-body">
+                         <div class="row">                              
+                              {foreach from=$profile_access key=j item=access}
+                                   {if $j != "name"}
+                                        <div class="col-lg-4 col-xs-6">
+                                             {$access->input}
+                                        </div>
+                                   {/if}
+                              {/foreach}
+                         </div>
+                    </div>
+               </div>
+          </div>
+     {/foreach}
+</div>

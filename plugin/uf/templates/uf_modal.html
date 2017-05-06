@@ -1,0 +1,41 @@
+<!-- Modal -->
+<div class="modal fade" id="ufModal" role="dialog" aria-labelledby="ufModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="ufModalLabel">Cadastrar {$page_name}</h4>
+            </div>
+            <div class="modal-body">
+                <span id="lastUpdate" class="pull-right">Última atualização:</span>
+                <form id="form_uf">
+                    <input type="hidden" id="uf_id" name="uf_id" value="">
+                    <div class="form-group">
+                        <label for="uf_name">Nome</label>
+                        <input type="text" class="form-control" id="uf_name" name="uf_name" placeholder="Nome">
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="uf_code">UF</label>
+                        <input type="text" class="form-control" id="uf_code" name="uf_code" placeholder="UF" maxlength="2">
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="uf_ibge">IBGE</label>
+                        <input type="text" class="form-control" id="uf_ibge" name="uf_ibge" placeholder="Código do IBGE" maxlength="2">
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnSubmit" onclick="submitUF()">Salvar</button>
+            </div>
+
+            <div class="overlay">
+              <i class="glyphicon glyphicon-refresh spin"></i>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,3 @@
+#product_unit_code, #table_product_unit tr td:nth-child(1){
+    text-transform: uppercase !important;
+}

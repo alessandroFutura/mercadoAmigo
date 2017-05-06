@@ -1,0 +1,36 @@
+<!-- Modal -->
+<div class="modal fade" id="unitModal" role="dialog" aria-labelledby="unitModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="unitModalLabel">Cadastrar {$page_name}</h4>
+            </div>
+            <div class="modal-body">
+                <span id="lastUpdate" class="pull-right">Última atualização:</span>
+                <form id="form_unit">
+                    <input type="hidden" id="product_unit_id" name="product_unit_id" value="">
+                    <div class="form-group">
+                        <label for="product_unit_code">Código</label>
+                        <input type="text" class="form-control" id="product_unit_code" maxlength="2" name="product_unit_code" placeholder="Código">
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="product_unit_name">Nome</label>
+                        <input type="text" class="form-control" id="product_unit_name" name="product_unit_name" placeholder="Nome">
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnSubmit" onclick="submitUnit()">Salvar</button>
+            </div>
+
+            <div class="overlay">
+              <i class="glyphicon glyphicon-refresh spin"></i>
+            </div>
+
+        </div>
+    </div>
+</div>

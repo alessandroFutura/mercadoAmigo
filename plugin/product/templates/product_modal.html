@@ -1,0 +1,178 @@
+<!-- Modal -->
+<div class="modal fade" id="productModal" role="dialog" aria-labelledby="productModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="productModalLabel">Cadastrar {$page_name}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab_cad" data-toggle="tab">Cadastro <i class="tab_erro_cad glyphicon glyphicon-exclamation-sign"></i></a></li>
+                        <li><a href="#tab_cost" data-toggle="tab">Historico de Custo <i class="tab_erro_cost glyphicon glyphicon-exclamation-sign"></i></a></li>
+                        <li><a href="#tab_price" data-toggle="tab">Historico de Preço <i class="tab_erro_price glyphicon glyphicon-exclamation-sign"></i></a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <!-- Cadastro geral da Pessoa -->
+                        <div class="tab-pane active" id="tab_cad">
+                            <span id="lastUpdate" class="pull-right">Última atualização:</span>
+                            <form id="form_product">
+                                <input type="hidden" id="product_id" name="product_id" value="">
+                                <div class="form-group margin-0">
+                                    <input type="checkbox" id="product_active" name="product_active" checked="checked" />
+                                    <label for="product_active">Ativo</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="product_code">Código</label>
+                                    <input readonly type="text" class="form-control" id="product_code" name="product_code" placeholder="Código">
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="product_name">Nome</label>
+                                    <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Nome">
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="product_unit_id">Unidade</label>
+                                    <select id="product_unit_id" name="product_unit_id[]" class="form-control select2" data-placeholder="Selecione as categorias" style="width: 100%">
+                                        <option readonly value="">-- Selecione a Unidade --</option>
+                                        {foreach from=$l_product_unit item=unit key=key}
+                                        <option value="{$unit->product_unit_id}">{$unit->product_unit_code} - {$unit->product_unit_name}</option>
+                                        {/foreach}
+                                    </select>
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="product_ean">Código de Barras</label>
+                                    <input type="text" class="form-control" id="product_ean" name="product_ean" placeholder="Código de Barras">
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="product_description">Descrição</label>
+                                    <textarea class="form-control" rows="3" id="product_description" name="product_description" placeholder="Descrição"></textarea>
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                <div class="row" id="productValues">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="provider_id">Fornecedor</label>
+                                            <select id="provider_id" name="provider_id" class="form-control select2" data-placeholder="Selecione o Fornecedor" style="width: 100%">
+                                                <option readonly value="">-- Selecione o Fornecedor --</option>
+                                                {foreach from=$l_person item=person key=key}
+                                                <option value="{$person->person_id}">{$person->person_code} - {$person->person_name}</option>
+                                                {/foreach}
+                                            </select>
+                                            <span class="erro_message pull-right"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="product_cost_value">Custo</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-usd"></i>
+                                                </div>
+                                                <input type="text" class="form-control numeric" id="product_cost_value" name="product_cost_value" value="0.00" data-inputmask="'alias': 'numeric'" data-mask>
+                                            </div>
+                                            <span class="erro_message pull-right"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="product_price_value">Preço</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-usd"></i>
+                                                </div>
+                                                <input type="text" class="form-control numeric" id="product_price_value" name="product_price_value" value="0.00" data-inputmask="'alias': 'numeric'" data-mask>
+                                            </div>
+                                            <span class="erro_message pull-right"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="tab-pane" id="tab_cost">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="new_provider_id">Fornecedor</label>
+                                        <select id="new_provider_id" name="new_provider_id" class="form-control select2" data-placeholder="Selecione o Fornecedor" style="width: 100%">
+                                            <option readonly value="">-- Selecione o Fornecedor --</option>
+                                            {foreach from=$l_person item=person key=key}
+                                            <option value="{$person->person_id}">{$person->person_code} - {$person->person_name}</option>
+                                            {/foreach}
+                                        </select>
+                                        <span class="erro_message pull-right"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="new_product_cost_value">Custo</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="glyphicon glyphicon-usd"></i>
+                                            </div>
+                                            <input type="text" class="form-control numeric" id="new_product_cost_value" name="new_product_cost_value" value="0.00" data-inputmask="'alias': 'numeric'" data-mask>
+                                        </div>
+                                        <span class="erro_message pull-right"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-pad-Top">
+                                    <a class="btn btn-success" id="btnAddCost" onclick="newCost()"><i class="glyphicon glyphicon-plus"></i> Novo Custo</a>
+                                </div>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <th>Usuário</th>
+                                    <th>Fornecedor</th>
+                                    <th>Valor</th>
+                                    <th>Data</th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="tab_price">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <label for="new_product_price_value">Preço</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="glyphicon glyphicon-usd"></i>
+                                            </div>
+                                            <input type="text" class="form-control numeric" id="new_product_price_value" name="new_product_price_value" value="0.00" data-inputmask="'alias': 'numeric'" data-mask>
+                                        </div>
+                                        <span class="erro_message pull-right"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-pad-Top">
+                                    <a class="btn btn-success" id="btnAddPrice" onclick="newPrice()"><i class="glyphicon glyphicon-plus"></i> Novo Preço</a>
+                                </div>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <th>Usuário</th>
+                                    <th>Valor</th>
+                                    <th>Data</th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnSubmit" onclick="submitProduct()">Salvar</button>
+            </div>
+            <div class="overlay">
+                <i class="glyphicon glyphicon-refresh spin"></i>
+            </div>
+        </div>
+    </div>
+</div>

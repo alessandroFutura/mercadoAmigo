@@ -1,0 +1,82 @@
+<!-- Modal -->
+<div class="modal fade" id="statusModal" role="dialog" aria-labelledby="statusModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="statusModalLabel">Cadastrar {$page_name}</h4>
+            </div>
+            <div class="modal-body">
+                <span id="lastUpdate" class="pull-right">Última atualização:</span>
+                <form id="form_status">
+                    <input type="hidden" id="order_status_id" name="order_status_id" value="">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group margin-0">
+                                <input type="checkbox" id="order_status_active" name="order_status_active" checked="checked" />
+                                <label for="order_status_active">Ativo</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 text-left">
+                            <div class="form-group margin-0">
+                                <input type="checkbox" id="order_status_editable" name="order_status_editable" />
+                                <label for="order_status_editable">Permite Edição do Pedido?</label>
+                            </div>
+                        </div>
+                        <!--<div class="col-xs-6">-->
+                            <!--<div class="form-group margin-0">-->
+                                <!--<input type="checkbox" id="order_status_start" name="order_status_start" />-->
+                                <!--<label for="order_status_start">Status Inicial dos Pedidos?</label>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-6 text-left">-->
+                            <!--<div class="form-group margin-0">-->
+                                <!--<input type="checkbox" id="order_status_end" name="order_status_end" />-->
+                                <!--<label for="order_status_end">Status Final dos Pedidos?</label>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="col-xs-6">
+                            <div class="form-group margin-0">
+                                <input type="checkbox" id="order_status_mail_admin" name="order_status_mail_admin" />
+                                <label for="order_status_mail_admin">Envia email para o Administrador?</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group margin-0">
+                                <input type="checkbox" id="order_status_mail_client" name="order_status_mail_client" />
+                                <label for="order_status_mail_client">Envia email para o Cliente?</label>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="order_status_code">Código</label>
+                        <input type="text" maxlength="2" class="form-control" id="order_status_code" name="order_status_code" placeholder="Código">
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="order_status_name">Nome</label>
+                        <input type="text" class="form-control" id="order_status_name" name="order_status_name" placeholder="Nome">
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="order_status_color">Cor</label>
+                        <div id="color">
+                            <input type="text" readonly class="form-control my-colorpicker1 colorpicker-element" id="order_status_color" name="order_status_color" placeholder="Cor">
+                        </div>
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnSubmit" onclick="submitOrderStatus()">Salvar</button>
+            </div>
+
+            <div class="overlay">
+              <i class="glyphicon glyphicon-refresh spin"></i>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<section class="content">
+	<!-- Your Page Content Here -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">Lista de {$page_name}</h3>
+					<div class="pull-right">
+						<!-- Button trigger modal -->
+						<!--<a class="btn btn-success" onclick="cadCity()">Cadastrar</a>-->
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<div class="form-group">
+						<label for="filter_uf">Filtro por UF</label>
+						<select class="form-control select2" id="filter_uf" name="filter_uf" style="width: 100%;">
+							<option value="" disabled="disabled" selected="selected">Selecione a UF</option>
+							{foreach from=$l_uf item=uf key=key}
+								<option value="{$uf->uf_id}">{$uf->uf_name}</option>
+							{/foreach}
+						</select>
+						<span class="erro_message pull-right"></span>
+					</div>
+                    <hr/>
+					<table id="table_city" class="table table-bordered table-hover" cellspacing="0" width="100%">
+						<thead>
+							<tr>
+								<th>Nome</th>
+								<th>UF</th>
+								<th>IBGE</th>
+							</tr>
+						</thead>
+						<tbody>
+							{foreach from=$l_city item=city key=key}
+								<tr>
+									<td data-label="Nome">{$city->city_name}</td>
+									<td data-label="UF">{$city->UF->uf_code}</td>
+									<td data-label="IBGE">{$city->city_ibge}</td>
+								</tr>
+							{/foreach}
+						</tbody>
+					</table>
+				</div>
+
+				{include file=$PATH_PLUGIN|cat:"city/templates/city_modal.html"}
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /.content -->

@@ -1,0 +1,70 @@
+<section class="content">
+	<!-- Your Page Content Here -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">Lista de Status</h3>
+					<div class="pull-right">
+						<!-- Button trigger modal -->
+						<a class="btn btn-success" onclick="cadStatus()"><span class="glyphicon glyphicon-plus"></span> Novo Status</a>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table id="table_status" class="table table-bordered table-hover" cellspacing="0" width="100%">
+						<thead>
+						<tr>
+							<th>Cor</th>
+							<th>Código</th>
+							<th>Nome</th>
+							<th>Pedidos</th>
+							<th></th>
+							<th></th>
+							<th class="visible-xs-block"></th>
+						</tr>
+						</thead>
+						<tbody>
+						{foreach from=$l_status item=status key=key}
+						<tr>
+							<td data-label="Cor" align="center" valign="middle"><span style="color:{$status->order_status_color};" class="glyphicon glyphicon-stop"></span></span></td>
+							<td data-label="Codigo" align="center">{$status->order_status_code}</td>
+							<td data-label="Nome">{$status->order_status_name}</td>
+							<td data-label="Pedidos" align="center">{$status->order_status_count_order}</td>
+							<td class="center hidden-xs"><a onclick="editStatus({$status->order_status_id})"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a></td>
+							<td class="center hidden-xs">
+								{if $status->order_status_super == "Y"}
+									<a class="customTooltip" data-toggle="tooltip" data-placement="left" title="Exclusão bloqueada!"><i class="glyphicon glyphicon-lock"></i></a>
+								{else}
+									{if $status->order_status_count_order > 0}
+										<a class="customTooltip" data-toggle="tooltip" data-placement="left" title="Exclusão bloqueada! Existe(m) pedido(s) vinculada(s) a este Status."><i class="glyphicon glyphicon-lock"></i></a>
+									{else}
+										<a name="btnDel" data-statusid="{$status->order_status_id}"><i class="glyphicon glyphicon-trash" title="Excluir"></i></a>
+									{/if}
+								{/if}
+							</td>
+							<td class="visible-xs-block">
+								<a class="btn btn-info" onclick="editStatus({$status->order_status_id})"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
+								{if $status->order_status_count_order > 0}
+								<a class="btn btn-danger customTooltip" data-toggle="tooltip" data-placement="left" title="Exclusão bloqueada! Existe(m) pedido(s) vinculada(s) a este Status."><i class="glyphicon glyphicon-lock"></i> Excluir</a>
+								{else}
+									{if $status->order_status_super == "Y"}
+										<a class="btn btn-danger customTooltip" data-toggle="tooltip" data-placement="left" title="Exclusão bloqueada!"><i class="glyphicon glyphicon-lock"></i> Excluir</a>
+									{else}
+										<a class="btn btn-danger" name="btnDel" data-statusid="{$status->order_status_id}"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
+									{/if}
+								{/if}
+							</td>
+						</tr>
+						{/foreach}
+						</tbody>
+					</table>
+				</div>
+
+				{include file=$PATH_PLUGIN|cat:"order/templates/order_status_modal.html"}
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /.content -->

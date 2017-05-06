@@ -1,0 +1,78 @@
+</div>
+<!-- /.content-wrapper -->
+{if $SCRIPT_NAME != 'login' && $SCRIPT_NAME != 'pass-recover' && $SCRIPT_NAME != 'new-pass'}
+	{include file=$PATH_PLUGIN|cat:"user/templates/pass_modal.html"}
+	<!-- Main Footer -->
+	<footer class="main-footer">
+		<!-- To the right -->
+		<div class="pull-right hidden-xs">
+			Versão: 1.0
+		</div>
+		<!-- Default to the left -->
+		<strong>Copyright &copy; {$year} <a href="#">O Mercado Amigo</a>.</strong> All rights reserved.
+	</footer>
+{/if}
+
+<!--{ include file=$PATH_TEMPLATES_ADMIN|cat:"passModal.html" }-->
+
+<!-- Mensagem de Alerta -->
+<div class="alert alert-dismissible" id="alter-info">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <h4><i class="icon glyphicon"></i> Alerta!</h4>
+  <span></span>
+</div>
+<!-- Mensagem de Alerta -->
+
+<!-- loading -->
+<div class="loading">
+	<i class="glyphicon glyphicon-refresh spin"></i>
+</div>
+<!-- loading -->
+<script src="{$URI_PUBLIC_ADMIN}jquery/jquery-2.2.4.min.js"></script>
+<script src="{$URI_PUBLIC_ADMIN}jquery/jquery-ui.min.js"></script>
+<script src="{$URI_PUBLIC_ADMIN}jquery/jquery.ui.touch-punch.min.js"></script>
+<script src="{$URI_PUBLIC_ADMIN}bootstrap-3.3.7/js/bootstrap.min.js"></script>
+<script src="{$URI_PUBLIC_ADMIN}bootstrap-3.3.7/js/bootstrap-confirmation.js"></script>
+<script src="{$URI_PUBLIC_ADMIN}plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="{$URI_PUBLIC_ADMIN}plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="{$URI_PUBLIC_ADMIN}plugins/select2/select2.full.min.js"></script>
+<script src="{$URI_PUBLIC_ADMIN}plugins/input-mask/inputmask.min.js"></script>
+<script src="{$URI_PUBLIC_ADMIN}plugins/input-mask/jquery.inputmask.min.js"></script>
+<script src="{$URI_PUBLIC_ADMIN}plugins/input-mask/inputmask.extensions.min.js"></script>
+<script src="{$URI_PUBLIC_ADMIN}plugins/input-mask/inputmask.date.extensions.min.js"></script>
+<script src="{$URI_PUBLIC_ADMIN}plugins/input-mask/inputmask.regex.extensions.min.js"></script>
+<script src="{$URI_PUBLIC_ADMIN}plugins/input-mask/inputmask.numeric.extensions.min.js"></script>
+<script src="{$URI_PUBLIC_ADMIN}plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="{$URI_JS_ADMIN}app.min.js"></script>
+<script src="{$URI_JS_ADMIN}global.js"></script>
+<script src="{$URI_JS_ADMIN}{$SCRIPT_NAME}.js"></script>
+{if !empty($smarty.get.module) && $smarty.get.module == "newClient"}
+	<script src="{$URI_JS_ADMIN}address.js"></script>
+	<!--<script src="{$URI_JS_ADMIN}person.js"></script>-->
+	<script src="{$URI_JS_ADMIN}office_person.js"></script>
+{/if}
+{if !empty($smarty.get.module) && $smarty.get.module == "payments"}
+	<script src="{$URI_JS_ADMIN}office_payments.js"></script>
+{/if}
+{if !empty($smarty.get.module) && $smarty.get.module == "rede"}
+	<script src="{$URI_JS_ADMIN}arbor/arbor.js"></script>
+	<script src="{$URI_JS_ADMIN}arbor/arbor-tween.js"></script>
+{/if}
+{if $SCRIPT_NAME == "person"}
+	<script src="{$URI_JS_ADMIN}address.js"></script>
+{/if}
+<script src="{$URI_PUBLIC_ADMIN}bootstrap-3.3.7/js/bootstrap-filestyle.min.js"></script>
+{if $SCRIPT_NAME == "order_status"}
+	<script src="{$URI_JS_ADMIN}bootstrap-colorpicker.min.js"></script>
+{/if}
+{if !empty($user) && $user->user_accept_contract == "N"}
+	{include file=$PATH_PLUGIN|cat:"user/templates/contract_modal2.html"}
+{/if}
+<script type="text/javascript">
+	var URI_PUBLIC = '{$URI_PUBLIC}';
+	var URI_PUBLIC_FILES = '{$URI_PUBLIC}files/';
+	var URI_PUBLIC_IMAGES = '{$URI_PUBLIC}images/';
+</script>
+</body>
+
+</html>

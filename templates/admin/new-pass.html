@@ -1,0 +1,46 @@
+{include file=$PATH_TEMPLATES_ADMIN|cat:"includes/header.html"}
+<div class="login-box">
+    <div class="login-logo">
+        <img src="{$URI_PUBLIC}admin/img/omercadoamigo.png ">
+    </div>
+    {if !empty($error)}<div class="alert alert-danger"><b>{$error}</b></div>{/if}
+    {if !empty($success)}<div class="alert alert-success"><b>{$success}</b></div>{/if}
+    <div class="login-box-body">
+        {if !empty($success)}
+            <p class="login-box-msg">A sua nova senha foi atualizada com sucesso. Agora basta acessar a tela de login e efetuar o acesso com a sua nova senha.</p>
+            <div class="row">
+                <div class="col-xs-12">
+                    <a href="{$URI_PUBLIC}admin/login/" class="btn btn-primary btn-block btn-flat">Efetuar login</a><br>
+                </div>
+            </div>
+        {else}
+            {if empty($error)}
+                <p class="login-box-msg"><b>Olá {$login->user_name}</b></p>
+                <p class="login-box-msg">Insira sua nova senha</p>
+                <form action="" method="post">
+                   <div class="form-group has-feedback">
+                        <input required="required" type="password" name="user_pass" class="form-control" placeholder="Senha">
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input required="required" type="password" name="user_pass_confirm" class="form-control" placeholder="Confirme a Senha">
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">Atualizar nova senha</button>
+                        </div>
+                    </div>
+                </form>
+            {else}
+                <p class="login-box-msg">{$error_desc}</p>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <a href="{$URI_PUBLIC}admin/login/" class="btn btn-primary btn-block btn-flat">Acessar tela de login</a><br>
+                    </div>
+                </div>
+            {/if}
+        {/if}
+    </div>
+</div>
+{include file=$PATH_TEMPLATES_ADMIN|cat:"includes/footer.html"}

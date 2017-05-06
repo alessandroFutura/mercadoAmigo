@@ -1,0 +1,140 @@
+<!-- Modal -->
+<div class="modal fade" id="kitModal" role="dialog" aria-labelledby="kitModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="kitModalLabel">Cadastrar {$page_name}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab_cad" data-toggle="tab">Cadastro <i class="tab_erro_cad glyphicon glyphicon-exclamation-sign"></i></a></li>
+                        <li><a id="aTabItems" href="#tab_items" data-toggle="tab">Produtos(<span>0</span>) <i class="tab_erro_cost glyphicon glyphicon-exclamation-sign"></i></a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <!-- Cadastro geral da Pessoa -->
+                        <div class="tab-pane active" id="tab_cad">
+                            <span id="lastUpdate" class="pull-right">Última atualização:</span>
+                            <form id="form_kit">
+                                <input type="hidden" id="kit_id" name="kit_id" value="">
+                                <div class="form-group margin-0">
+                                    <input type="checkbox" id="kit_active" name="kit_active" checked="checked" />
+                                    <label for="kit_active">Ativo</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="kit_code">Código</label>
+                                    <input readonly type="text" class="form-control" id="kit_code" name="kit_code" placeholder="Código">
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="kit_name">Nome</label>
+                                    <input type="text" class="form-control" id="kit_name" name="kit_name" placeholder="Nome">
+                                    <span class="erro_message pull-right"></span>
+                                </div>
+                                <div class="row" id="kitValues">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="kit_addition">Acréscimo</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-usd"></i>
+                                                </div>
+                                                <input type="text" class="form-control numeric" id="kit_addition" name="kit_addition" value="0.00" data-inputmask="'alias': 'numeric'" data-mask>
+                                            </div>
+                                            <span class="erro_message pull-right"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="kit_discount">Desconto</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-usd"></i>
+                                                </div>
+                                                <input type="text" class="form-control numeric" id="kit_discount" name="kit_discount" value="0.00" data-inputmask="'alias': 'numeric'" data-mask>
+                                            </div>
+                                            <span class="erro_message pull-right"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="kit_items_value">Total dos Itens</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-usd"></i>
+                                                </div>
+                                                <input readonly type="text" class="form-control numeric" id="kit_items_value" name="kit_items_value" value="0.00">
+                                            </div>
+                                            <span class="erro_message pull-right"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="kit_value">Valor Total</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-usd"></i>
+                                                </div>
+                                                <input {if $user->UserProfile->UserProfileAccess->kit->price->value == "N"}readonly{/if} type="text" class="form-control numeric" id="kit_value" name="kit_value" value="0.00" data-inputmask="'alias': 'numeric'" data-mask>
+                                            </div>
+                                            <span class="erro_message pull-right"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="tab-pane" id="tab_items">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="product_id">Produto</label>
+                                        <select id="product_id" name="product_id" class="form-control select2" data-placeholder="Selecione o Produto" style="width: 100%">
+                                            <option readonly value="">-- Selecione o Produto --</option>
+                                            {foreach from=$l_product item=product key=key}
+                                                <option data-name="{$product->product_name}" data-price="{if !empty($product->product_price)}{$product->product_price->product_price_value}{else}0{/if}" value="{$product->product_id}">{$product->product_code} - {$product->product_name}</option>
+                                            {/foreach}
+                                        </select>
+                                        <span class="erro_message pull-right"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                       <div class="form-group">
+                                            <label for="kit_item_amount">Quantidade</label>
+                                            <input type="text" class="form-control" id="kit_item_amount" name="kit_item_amount" value="1" data-inputmask="'alias': 'integer'" data-mask>
+                                            <span class="erro_message pull-right"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-pad-Top">
+                                    <a class="btn btn-success" id="btnAddCost" onclick="newItem()"><i class="glyphicon glyphicon-plus"></i> Adicionar</a>
+                                </div>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <th>&nbsp;</th>
+                                    <th>Produto</th>
+                                    <th>Quantidade</th>
+                                    <th>Valor Unitario</th>
+                                    <th>Valor Total</th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnSubmit" onclick="submitKit()">Salvar</button>
+            </div>
+            <div class="overlay">
+                <i class="glyphicon glyphicon-refresh spin"></i>
+            </div>
+        </div>
+    </div>
+</div>

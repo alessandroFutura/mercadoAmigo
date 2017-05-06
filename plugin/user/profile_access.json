@@ -1,0 +1,164 @@
+{
+	"receivable": {
+		"name": "A Receber",
+		"access": {
+			"name": "Visualiza",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='receivable_access' name='receivable_access' /><label for='receivable_access'>Visualiza</label>"
+		}
+	},
+	"account": {
+		"name": "Conta Corrente",
+		"access": {
+			"name": "Visualiza",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='account_access' name='account_access' /><label for='account_access'>Visualiza</label>"
+		}
+	},
+	"office": {
+		"name": "Escritório",
+		"access": {
+			"name": "Visualiza",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='office_access' name='office_access' /><label for='office_access'>Visualiza</label>"
+		}
+	},
+	"kit": {
+		"name": "Kits",
+		"access": {
+			"name": "Visualiza",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='kit_access' name='kit_access' /><label for='kit_access'>Visualiza</label>"
+		},
+		"price": {
+			"name": "Editar Preço",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='kit_price' name='kit_price' /><label for='kit_price'>Editar Preço</label>"
+		}
+	},
+	"product": {
+		"name": "Produtos",
+		"access": {
+			"name": "Visualiza",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='product_access' name='product_access' /><label for='product_access'>Visualiza</label>"
+		}
+	},
+	"order": {
+		"name": "Pedidos",
+		"access": {
+			"name": "Visualiza",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='order_access' name='order_access' /><label for='order_access'>Visualiza</label>"
+		},
+		"add": {
+			"name": "Visualiza",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='order_add' name='order_add' /><label for='order_add'>Adicionar</label>"
+		},
+		"edit": {
+			"name": "Visualiza",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='order_edit' name='order_edit' /><label for='order_edit'>Edita</label>"
+		},
+		"delete": {
+			"name": "Visualiza",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='order_delete' name='order_delete' /><label for='order_delete'>Exclui</label>"
+		},
+		"addition": {
+			"name": "Acréscimo no Pedido",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='order_addition' name='order_addition' /><label for='order_addition'>Acréscimo</label>"
+		},
+		"discount": {
+			"name": "Desconto no Pedido",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='order_discount' name='order_discount' /><label for='order_discount'>Desconto</label>"
+		},
+		"status": {
+			"name": "Altera Status",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='order_status' name='order_status' /><label for='order_status'>Altera Status</label>"
+		},
+		"person": {
+			"name": "Altera Pessoa",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='order_person' name='order_person' /><label for='order_person'>Altera Pessoa</label>"
+		},
+		"status_access": {
+			"name": "Status dos Pedidos",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='order_status_access' name='order_status_access' /><label for='order_status_access'>Cadastro de Status</label>"
+		}
+	},
+	"person": {
+		"name": "Pessoas",
+		"access": {
+			"name": "Visualiza",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='person_access' name='person_access' /><label for='person_access'>Visualiza</label>"
+		}
+	},
+	"user": {
+		"name": "Usuários",
+		"access": {
+			"name": "Visualiza",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='user_access' name='user_access' /><label for='user_access'>Visualiza</label>"
+		}
+	},
+	"text": {
+		"name": "Textos",
+		"access": {
+			"name": "Visualiza",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='text_access' name='text_access' /><label for='text_access'>Visualiza</label>"
+		}
+	},
+	"uf": {
+		"name": "UF",
+		"access": {
+			"name": "Visualiza",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='uf_access' name='uf_access' /><label for='uf_access'>Visualiza</label>"
+		}
+	},
+	"city": {
+		"name": "Cidades",
+		"access": {
+			"name": "Cidades",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='city_access' name='city_access' /><label for='city_access'>Visualiza</label>"
+		}
+	},
+	"district": {
+		"name": "Bairros",
+		"access": {
+			"name": "Visualiza",
+			"value": "N",
+			"data_type": "bool",
+			"input": "<input type='checkbox' id='district_access' name='district_access' /><label for='district_access'>Visualiza</label>"
+		}
+	}
+}

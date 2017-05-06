@@ -1,0 +1,35 @@
+.alert{
+    text-align: center;
+    margin: 0;
+    padding: 10px 15px;
+    display: block;
+    position: inherit;
+    z-index: inherit;
+    top: inherit;
+    width: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    box-shadow: none;
+}
+
+#alter-info{
+    display: none;
+}
+
+.login-logo img{
+    max-width: 100%;
+}
+
+@media (min-width: 768px) {
+    .login-logo{
+        font-size: 35px;
+    }
+}
+
+@media (min-width: 992px) {
+
+}
+
+@media (min-width: 1200px) {
+
+}

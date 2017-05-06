@@ -1,0 +1,31 @@
+<!-- Modal -->
+<div class="modal fade" id="categoryModal" role="dialog" aria-labelledby="categoryModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="categoryModalLabel">Cadastrar {$page_name}</h4>
+            </div>
+            <div class="modal-body">
+                <span id="lastUpdate" class="pull-right">Última atualização:</span>
+                <form id="form_category">
+                    <input type="hidden" id="person_category_id" name="person_category_id" value="">
+                    <div class="form-group">
+                        <label for="person_category_name">Nome</label>
+                        <input type="text" class="form-control" id="person_category_name" name="person_category_name" placeholder="Nome">
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnSubmit" onclick="submitCategory()">Salvar</button>
+            </div>
+
+            <div class="overlay">
+              <i class="glyphicon glyphicon-refresh spin"></i>
+            </div>
+
+        </div>
+    </div>
+</div>

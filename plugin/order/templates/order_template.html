@@ -1,0 +1,77 @@
+<section class="content">
+	<!-- Your Page Content Here -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">Lista de {$page_name}</h3>
+					<div class="pull-right">
+						<!-- Button trigger modal -->
+						{if $user->UserProfile->UserProfileAccess->order->add->value == "Y"}
+							<a class="btn btn-success" onclick="cadOrder()"><span class="glyphicon glyphicon-plus"></span> Novo Pedido</a>
+						{else}
+						<a disabled="disabled" class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Ação não autorizada!"><span class="glyphicon glyphicon-lock"></span> Novo Pedido</a>
+						{/if}
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table id="table_order" class="table table-bordered table-hover" cellspacing="0" width="100%">
+						<thead>
+						<tr>
+							<th></th>
+							<th>Código</th>
+							<th>Cliente</th>
+							<th>Kits</th>
+							<th>R$ Total</th>
+							<th></th>
+							<th></th>
+							<th class="visible-xs-block"></th>
+						</tr>
+						</thead>
+						<tbody>
+						{foreach from=$l_order item=order key=key}
+						<tr data-orderid="{$order->order_id}">
+							<td data-label="Status" align="center" valign="middle"><span data-toggle="tooltip" data-placement="top" title="{$order->OrderStatus->order_status_name}" style="color:{$order->OrderStatus->order_status_color};" class="glyphicon glyphicon-stop"></span></span></td>
+							<td data-label="Codigo">{$order->order_code}</td>
+							<td data-label="Client">{$order->Person->person_name}</td>
+							<td data-label="Kits">{$order->OrderItem|@count}</td>
+							<td data-label="Total">{$order->order_value_total}</td>
+							<td class="center hidden-xs">
+								{if $user->UserProfile->UserProfileAccess->order->edit->value == "Y"}
+									<a onclick="editOrder({$order->order_id})"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a></td>
+								{else}
+									<a disabled="disabled" data-toggle="tooltip" data-placement="left" title="Ação não autorizada!"><i class="glyphicon glyphicon-lock" title="Editar"></i></a></td>
+								{/if}
+							<td class="center hidden-xs">
+								{if $user->UserProfile->UserProfileAccess->order->delete->value == "Y"}
+									<a name="btnDel" data-orderid="{$order->order_id}"><i class="glyphicon glyphicon-trash" title="Excluir"></i></a>
+								{else}
+									<a disabled="disabled" data-toggle="tooltip" data-placement="left" title="Ação não autorizada!"><i class="glyphicon glyphicon-lock" title="Excluir"></i></a>
+								{/if}
+							</td>
+							<td class="visible-xs-block">
+								{if $user->UserProfile->UserProfileAccess->order->edit->value == "Y"}
+									<a class="btn btn-info" onclick="editOrder({$order->order_id})"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
+								{else}
+									<a disabled="disabled" class="btn btn-info" data-toggle="tooltip" title="Ação não autorizada!"><i class="glyphicon glyphicon-lock"></i> Editar</a>
+								{/if}
+								{if $user->UserProfile->UserProfileAccess->order->delete->value == "Y"}
+									<a class="btn btn-danger" name="btnDel" data-orderid="{$order->order_id}"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
+								{else}
+									<a disabled="disabled" class="btn btn-danger" data-toggle="tooltip" title="Ação não autorizada!"><i class="glyphicon glyphicon-lock"></i> Excluir</a>
+								{/if}
+							</td>
+						</tr>
+						{/foreach}
+						</tbody>
+					</table>
+				</div>
+
+				{include file=$PATH_PLUGIN|cat:"order/templates/order_modal.html"}
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /.content -->

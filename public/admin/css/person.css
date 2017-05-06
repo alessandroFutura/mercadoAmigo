@@ -1,0 +1,79 @@
+.modal-body{
+    max-height: 440px;
+    overflow-y: auto;
+}
+
+.nav-tabs-custom{
+    margin: 0;
+    box-shadow: none;
+}
+
+.boxBtn{
+    margin-bottom: 10px;
+}
+
+.panel-group{
+    cursor: pointer;
+}
+.panel-default{
+    border: 0;
+}
+.panel-heading{
+    padding: 0;
+}
+.panel-heading a, .panel-heading a:hover, .panel-heading a:focus{
+    color: white;
+    outline: none !important;
+    text-decoration: none;
+}
+
+.panel-title{
+    background-color: #3c8dbc;
+    color: white;
+    padding: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.collapsed{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.panel-collapse{
+    border: 1px solid #ddd;
+    border-top: 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.panel-group .panel-heading+.panel-collapse>.panel-body{
+    border-top: 0;
+}
+
+.panel-heading > a.collapsed > .glyphicon-menu-down{
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.btnDelAddress, .btnDelContact{
+    font-size: 18px;
+}
+
+.glyphicon-star{
+    color: #f3c81b;
+}
+
+.erro_message_address, .erro_message_contact{
+    color: white;
+    margin-right: 10px;
+    display: none;
+}
+
+.panel-title-erro{
+    background-color: #e05a48;
+}
+
+.tab_erro_cad, .tab_erro_address, .tab_erro_contact, .tab_erro_bank, .tab_erro_rede{
+    display: none;
+    color: #e05a48;
+}

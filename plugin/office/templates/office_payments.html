@@ -1,0 +1,47 @@
+{include file=$PATH_TEMPLATES_ADMIN|cat:"includes/header.html"}
+
+<div id="dashboardTemplate">
+    <section class="content">
+        <!-- Your Page Content Here -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-primary">
+                    <div class="box-header">
+                    </div>
+                    <div class="box-body">
+                        <table id="table_receivable" class="table table-bordered table-hover" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Código</th>
+                                <th>Modalidade</th>
+                                <!--<th>Pessoa</th>-->
+                                <th>Valor</th>
+                                <th>Dt. Vencimento</th>
+                                <th>Dt. Pagamento</th>
+                                <th>Boleto</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach from=$l_receivable item=receivable key=key}
+                            <tr style="color:{if !empty($receivable->receivable_payment_date)}green{else}{if (int)$receivable->receivable_deadline|date_format:'%Y%m%d' < (int)$smarty.now|date_format:'%Y%m%d'}red{else}#333{/if}{/if};">
+                                <td data-label="Status" align="center" valign="middle"><span data-toggle="tooltip" data-placement="top" title="{if !empty($receivable->receivable_payment_date)}Pago{else}{if (int)$receivable->receivable_deadline|date_format:'%Y%m%d' < (int)$smarty.now|date_format:'%Y%m%d'}Vencido{else}Aberto{/if}{/if}" class="glyphicon glyphicon-stop"></span></span></td>
+                                <td data-label="Código">{$receivable->receivable_code}</td>
+                                <td data-label="Modalidade">Boleto</td>
+                                <!--<td data-label="Pessoa">{$receivable->Person->person_name}</td>-->
+                                <td data-label="Valor">{$receivable->receivable_value}</td>
+                                <td data-label="Vencimento">{$receivable->receivable_deadline|date_format:"%d/%m/%Y"}</td>
+                                <td data-label="Pagamento">{if !empty($receivable->receivable_payment_date)}{$receivable->receivable_payment_date|date_format:"%d/%m/%Y"}{else}--{/if}</td>
+                                <td class="center hidden-xs">{if !empty($receivable->receivable_file)}<a target="_blank" href="{$URI_FILES}receivable/{$receivable->receivable_file}"><i class="fa fa-file-pdf-o" title="Baixar Boleto"></i></a>{/if}</td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{include file=$PATH_TEMPLATES_ADMIN|cat:"includes/footer.html"}

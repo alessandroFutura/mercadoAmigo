@@ -1,0 +1,78 @@
+<form id="form_address">
+    <input type="hidden" name="delete_address" id="delete_address" />
+    <div class="panel-group" id="accordionAddress" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default" id="addressModel" style="display: none">
+            <div class="panel-heading" role="tab" id="headingAddress">
+                <a class="panel-title btn-block collapsed" role="button" data-toggle="collapse" data-parent="#accordionAddress" href="#boxAddressModel" aria-expanded="false" aria-controls="boxAddressModel">
+                    <i title="Principal" class="glyphicon glyphicon-star-empty"></i>
+                    <i title="Entrega" class="glyphicon glyphicon-plane"></i>
+                    <span class="address_title">Endereço 01</span>
+                    <i class="arrow glyphicon glyphicon-menu-down pull-right"></i>
+                    <span class="erro_message_address pull-right">Dados Incompletos</span>
+                </a>
+            </div>
+            <div id="boxAddressModel" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingAddress">
+                <div class="panel-body">
+                    <input type="hidden" id="address_id" name="address_id[]" value="" >
+                    <div class="form-group margin-0">
+                        <input type="checkbox" id="address_main" name="address_main[]"/>
+                        <label for="address_main">Principal</label>
+                        &nbsp;
+                        <input type="checkbox" id="address_delivery" name="address_delivery[]"/>
+                        <label for="address_delivery">Entrega</label>
+                        <a name="btnDelAddress" class="btnDelAddress pull-right"><i class="glyphicon glyphicon-trash" title="Excluir"></i></a>
+                    </div>
+                    <div class="form-group">
+                        <label>CEP</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="address_cep[]" placeholder="CEP" data-inputmask='"mask": "99999-999"' data-mask>
+                            <div class="input-group-addon cep" data-toggle="tooltip" data-placement="left" title="Pesquisar Cep">
+                                <a onclick="searchCep(this)"><i class="glyphicon glyphicon-search"></i></a>
+                            </div>
+                        </div>
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <select class="form-control select2" name="filter_uf[]" style="width: 100%;">
+                            <option value="" disabled="disabled" selected="selected">Selecione a UF</option>
+                            {foreach from=$l_uf item=uf key=key}
+                            <option value="{$uf->uf_code}">{$uf->uf_name}</option>
+                            {/foreach}
+                        </select>
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Cidade</label>
+                        <select class="form-control select2" name="filter_city[]" style="width: 100%;" disabled>
+                            <option value="" disabled="disabled" selected="selected">Selecione a Cidade</option>
+                        </select>
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Bairro</label>
+                        <select class="form-control select2" name="district_id[]" style="width: 100%;" disabled>
+                            <option value="" disabled="disabled" selected="selected">Selecione o Bairro</option>
+                        </select>
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="address_public_place">Logradouro</label>
+                        <input type="text" class="form-control" id="address_public_place" name="address_public_place[]" placeholder="Logradouro">
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="address_number">Número</label>
+                        <input type="text" class="form-control" id="address_number" name="address_number[]" placeholder="Número">
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="address_complement">Complemento</label>
+                        <input type="text" class="form-control" id="address_complement" name="address_complement[]" placeholder="Complemento">
+                        <span class="erro_message pull-right"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

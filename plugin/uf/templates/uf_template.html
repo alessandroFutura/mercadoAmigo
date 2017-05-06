@@ -1,0 +1,37 @@
+<section class="content">
+	<!-- Your Page Content Here -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">Lista de {$page_name}</h3>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table id="table_uf" class="table table-bordered table-hover" cellspacing="0" width="100%">
+						<thead>
+							<tr>
+								<th>Nome</th>
+								<th>UF</th>
+								<th>IBGE</th>
+							</tr>
+						</thead>
+						<tbody>
+							{foreach from=$l_uf item=uf key=key}
+								<tr>
+									<td data-label="Nome">{$uf->uf_name}</td>
+									<td data-label="UF">{$uf->uf_code}</td>
+									<td data-label="IBGE">{$uf->uf_ibge}</td>
+								</tr>
+							{/foreach}
+						</tbody>
+					</table>
+				</div>
+
+				{include file=$PATH_PLUGIN|cat:"uf/templates/uf_modal.html"}
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /.content -->

@@ -1,0 +1,58 @@
+<section class="content">
+	<!-- Your Page Content Here -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">Lista de {$page_name}</h3>
+					<div class="pull-right">
+						<!-- Button trigger modal -->
+						<a class="btn btn-success" onclick="cadPerson()">Cadastrar</a>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table id="table_person" class="table table-bordered table-hover" cellspacing="0" width="100%">
+						<thead>
+						<tr>
+							<!--th>Ativo</th-->
+							<th>Tipo</th>
+							<th>Código</th>
+							<th>Nome</th>
+							<th>Apelido</th>
+							<th>Doc</th>
+							<th></th>
+							<th></th>
+							<th class="visible-xs-block"></th>
+						</tr>
+						</thead>
+						<tbody>
+						{foreach from=$l_person item=person key=key}
+						<tr>
+							<!--td data-label="Ativo">{if $person->person_active == "Y"}Sim{else}Não{/if}</td-->
+							<td data-label="Tipo">{if $person->person_type == "F"}Física{else}Jurídica{/if}</td>
+							<td data-label="Código">{$person->person_code}</td>
+							<td data-label="Nome">{$person->person_name}</td>
+							<td data-label="Apelido">{$person->person_nickname}</td>
+							<td data-label="CNPJ">{if $person->person_type == "J"}{$person->person_cnpj}{else}{$person->person_cpf}{/if}</td>
+							<td class="center hidden-xs"><a onclick="editPerson({$person->person_id})"><i class="glyphicon glyphicon-pencil" title="Editar"></i></a></td>
+							<td class="center hidden-xs">
+								<a name="btnDel" data-personid="{$person->person_id}"><i class="glyphicon glyphicon-trash" title="Excluir"></i></a>
+							</td>
+							<td class="visible-xs-block">
+								<a class="btn btn-info" onclick="editPerson({$person->person_id})"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
+								<a class="btn btn-danger" name="btnDel" data-personid="{$person->person_id}"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
+							</td>
+						</tr>
+						{/foreach}
+						</tbody>
+					</table>
+				</div>
+
+				{include file=$PATH_PLUGIN|cat:"person/templates/person_modal.html"}
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /.content -->

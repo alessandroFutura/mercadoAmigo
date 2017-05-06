@@ -1,0 +1,48 @@
+{include file=$PATH_TEMPLATES_ADMIN|cat:"includes/header.html"}
+<div class="login-box">
+    <div class="login-logo">
+        <img src="{$URI_PUBLIC}admin/img/omercadoamigo.png ">
+    </div>
+    <!-- /.login-logo -->
+    {if !empty($error)}<div class="alert alert-danger"><b>{$error}</b></div>{/if}
+    {if !empty($success)}<div class="alert alert-success"><b>{$success}</b></div>{/if}
+    <div class="login-box-body">
+        {if empty($success)}
+            <p class="login-box-msg"><b>Recuperar senha</b></p>
+        {else}
+            <p class="login-box-msg">Acesse seu email para verificar as intruções de recuperação da sua senha.</p>
+            <div class="row">
+                <div class="col-xs-12">
+                    <a href="{$URI_PUBLIC}admin/login/" class="btn btn-primary btn-block btn-flat">Voltar para a tela de login</a><br>
+                </div>
+            </div>
+        {/if}
+        {if empty($success)}
+            <form action="" method="post">
+                <div class="form-group has-feedback">
+                    <input type="text" name="user_user" class="form-control" placeholder="CPF">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <!--<div class="form-group has-feedback">-->
+                    <!--<input type="password" name="user_pass" class="form-control" placeholder="Senha">-->
+                    <!--<span class="glyphicon glyphicon-lock form-control-feedback"></span>-->
+                <!--</div>-->
+                <div class="row">
+                    <div class="col-xs-4">
+                        <a href="{$URI_PUBLIC}admin/login/" class="btn btn-danger btn-block btn-flat">Voltar</a><br>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-xs-8">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Solicitar Nova Senha</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        {/if}
+
+        <!--<a href="#">Esqueci minha senha</a><br> -->
+
+    </div>
+    <!-- /.login-box-body -->
+</div>
+{include file=$PATH_TEMPLATES_ADMIN|cat:"includes/footer.html"}
